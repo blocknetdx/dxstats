@@ -1,4 +1,4 @@
-var stream = require('./stream')
+let stream = require('./stream')
 
 module.exports = {
   createDecodeStream: stream.createDecodeStream,

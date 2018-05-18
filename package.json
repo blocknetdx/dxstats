@@ -1,0 +1,14 @@
+{
+  "name": "blockdx-explorer",
+  "version": "0.0.1",
+  "dependencies": {
+    "bl": "^1.2.2",
+    "buffer-equals": "^1.0.4",
+    "buffer-reverse": "^1.0.1",
+    "create-hash": "^1.2.0",
+    "ip": "^1.1.5",
+    "through2": "^2.0.3",
+    "varstruct": "^6.1.2",
+    "varuint-bitcoin": "^1.1.0"
+  }
+}

@@ -2,6 +2,7 @@ const dns = require('dns');
 const net = require('net');
 const coinParams = require('../config/coins.js');
 const network = require('./P2P');
+const bufferReverse = require('buffer-reverse');
 
 "use strict";
 
@@ -13,72 +14,104 @@ class Coin {
 	init() {
 		console.log("test")
 		console.log("init: " + this.network.name + " api")
-		this.lastBlock()
-	}
-
-	lastBlock() {
-		var self = this;
-
-		self.connectAndBroadcastLastBlock();
-		setInterval(function() {
-			self.connectAndBroadcastLastBlock();
-		}, 10000);
-	}
-
-	async connectAndBroadcastLastBlock() {
-		const s = this.createConnectionToPeer(null),
-		socket = s[0],
-		recv = s[1],
-		self = this;
-
-		recv.on('data', function (data) {
-			if (data !== undefined && data.command === 'version' && data.magic !== undefined) {
-				console.log(data)
-				console.log('blockheight:' + data.magic.toString(), data.payload.startHeight);
-				socket.end();		
-			}
-		});
-
-		socket.on('error', function (err) {
-		    console.log(err);
-		});
-
-		socket.on('uncaughtException', function (err) {
-		    console.log(err);
-		}); 
+		this.createConnectionToPeer()
 	}
 
 	// writedata for future use
-	createConnectionToPeer(writeData) {
-		const self = this,
-		recv = network.createDecodeStream(),
-		send = network.createEncodeStream(),
+	createConnectionToPeer() {
+		var decoder = network.createDecodeStream(),
+		self = this;
+		decoder.on('data', function (message) { 
+			//console.log(message)
+			if (message.payload) {
+				var buf = Buffer.from(JSON.stringify(message.payload));
+				var temp = JSON.parse(buf.toString('utf8'));
+				//console.log(temp)
 
-		socket = net.connect(self.network.defaultPort, self.network.dnsSeeds[0], function () {
-		  	socket.pipe(recv)
-		  	send.pipe(socket)
-		  	//send.write(self.versionPayload());
-		  	send.write(self.getBlocksPayload())
-		
-		  	if (writeData !== null && writeData !== undefined) {
-		  		send.write(writeData);
-		  	}
+				if (message.command == 'xbridge') {
+					console.log(temp);
+					console.log((Buffer.from(bufferReverse(new Buffer(temp.header.version.data, 'hex')))).toString('hex'));
+                    console.log((Buffer.from(bufferReverse(new Buffer(temp.header.commandSize.data, 'hex')))).toString('hex'));
+                    console.log((Buffer.from(bufferReverse(new Buffer(temp.header.oldSizeField.data, 'hex')))).toString('hex'));
+                    console.log((Buffer.from(bufferReverse(new Buffer(temp.header.sizeField.data, 'hex')))).toString('hex'));
+                    console.log((Buffer.from(bufferReverse(new Buffer(temp.header.pubkeyField.data, 'hex')))).toString('hex'));
+                    console.log((Buffer.from(bufferReverse(new Buffer(temp.header.signatureField.data, 'hex')))).toString('hex'));
+
+                    console.log((Buffer.from(bufferReverse(new Buffer(temp.hubAddr.data, 'hex')))).toString('hex'));
+                    console.log((Buffer.from(bufferReverse(new Buffer(temp.id.data, 'hex')))).toString('hex'));
+                    console.log((Buffer.from(bufferReverse(new Buffer(temp.sourceAddr.data, 'hex')))).toString('hex'));
+                    console.log((Buffer.from(bufferReverse(new Buffer(temp.sourceCurrency.data, 'hex')))).toString('hex'));
+                    console.log((Buffer.from(bufferReverse(new Buffer(temp.sourceAmt.data, 'hex')))).toString('hex'));
+
+                    console.log((Buffer.from(bufferReverse(new Buffer(temp.destAddr.data, 'hex')))).toString('hex'));
+                    console.log((Buffer.from(bufferReverse(new Buffer(temp.destCurrency.data, 'hex')))).toString('hex'));
+                    console.log((Buffer.from(bufferReverse(new Buffer(temp.destAmt.data, 'hex')))).toString('hex'));
+				}
+
+				if (typeof temp[0] != 'undefined') {
+					if (temp.length > 0) {
+						for (var i = 0; i < temp.length; i++) {
+							if (temp[i].type == 2) {
+								let bufferOriginal = Buffer.from(bufferReverse(new Buffer(temp[i].hash.data, 'hex')));
+								console.log(bufferOriginal.toString('hex'))
+							} else if (temp[i].type == 2) {
+								let bufferOriginal = Buffer.from(bufferReverse(new Buffer(temp[i].hash.data, 'hex')));
+								console.log(bufferOriginal.toString('hex'))
+							}
+						}
+
+					}
+				}
+			}
 		})
 
-		return [ socket, recv, send ]
+		let encoder = network.createEncodeStream();
+
+		let socket = net.connect(self.network.defaultPort, self.network.dnsSeeds[0], function () {
+		  socket.pipe(decoder);
+		  encoder.pipe(socket);
+
+		  encoder.write(self.versionPayload());
+		  encoder.write(self.getBlocksPayload());
+		  encoder.write(self.getData());
+		})
 	}
 
 	getBlocksPayload() {
+		let arr = [
+			"c4b7aeaa959aad9a25b10c0615f4332d5190f842edafd4ead514f184279b22d7",
+			"a2be09fa9e8c9e1a47287451a27ed4c899da4bcf1ebd101fc066a2eb467b7460",
+			"b81a3d024bfcc1cff00bde22e019e39d81b14b6c1d59ab4e0af5e307868e2ee1"
+		];
+
+		let x = [];
+		for (let i = 0; i < arr.length ; i++) {
+			x[i] = Buffer.from(arr[i], "hex")
+		}
+
 		return {
 		    magic: this.network.magic,
 		    command: 'getblocks',
 		    payload: {
 				version: this.network.protocolVersion,
 				locator: [
-					new Buffer(32)
+					x[2],
+					x[1],
+					x[0]
 				],
-				hashStop: new Buffer(32)
+				hashStop: new Buffer(32).fill(0)
 		    }
+	  	}
+	}
+
+	getData() {
+		return {
+		    magic: this.network.magic,
+		    command: 'getdata',
+		    payload: [{
+				type: 2,
+				hash: Buffer.from('7065d1f3ad69567fdd7f095e2e6e4f5d5ce7b4b27b0331f29497ec25f67db99f', 'hex')
+		    }]
 	  	}
 	}
 
@@ -92,24 +125,26 @@ class Coin {
 		      timestamp: Math.round(Date.now() / 1000),
 		      receiverAddress: {
 		        services: Buffer('0100000000000000', 'hex'),
-		        address: '0.0.0.0'
+		        address: '0.0.0.0',
+		        port: 8333
 		      },
 		      senderAddress: {
-		        services: (new Buffer(8)).fill(0),
-		        address: '0.0.0.0'
+		        services: Buffer(8).fill(0),
+		        address: '0.0.0.0',
+		        port: 8333
 		      },
 		      nonce: Buffer(8).fill(123),
 		      userAgent: 'Node P2P',
-		      startHeight: 0
+		      startHeight: 0,
+		      relay: true
 		    }
-	  	}
+		  }
 	}
 }
 
-
 coinParams.forEach(function(coinParam) {
 	if (coinParam.useCoin) {
-		new Coin(coinParam).init(io);
+		new Coin(coinParam).init();
 	}
 });
 
