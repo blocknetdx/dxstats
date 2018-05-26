@@ -6,6 +6,6 @@ module.exports = [
 		magic: 0xa3a2a0a1,
 		dnsSeeds: ['178.62.90.213'],
 		protocolVersion: 70711,
-		useCoin: false
+		useCoin: true
 	}
 ];

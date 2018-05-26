@@ -5,6 +5,7 @@ const createHash = require('create-hash');
 const bufferEquals = require('buffer-equals');
 const defaultMessages = require('./structs').defaultMessages;
 const types = require('./types');
+
 //const SUBV = '/EXPERIMENTAL-NODE:1.0.0/';
 
 function getChecksum(data) {
@@ -34,13 +35,52 @@ exports.createDecodeStream = function (opts) {
 	return through(function (chunk, enc, cb) {
 		bl.append(chunk);
 		while (bl.length > 0) {
+
 			if (!message) {
 				if (msgLen > bl.length) break;
 				try {
-					message = msgHeader.decode(bl.slice(0, msgLen))
+					message = msgHeader.decode(bl.slice(0, msgLen));
 				} catch (err) {
-					return cb(err)
+					return cb(err);
 				}
+
+				/*if (message.command === 'xbridge') {
+					msgHeader = struct([
+						{name: 'magic', type: struct.UInt32LE},
+						{name: 'command', type: types.messageCommand},
+						{name: 'length', type: struct.UInt32LE},
+						{name: 'checksum', type: struct.Buffer(4)},
+						{name: 'version', type: struct.UInt32LE},
+						{name: 'commandSize', type: struct.UInt32LE},
+						{name: 'timestampSize', type: struct.UInt32LE},
+						{name: 'oldSizeField', type: struct.UInt32LE},
+						{name: 'sizeField', type: struct.UInt32LE},
+						{name: 'pubkeyField', type: struct.Buffer(33)},
+						{name: 'signatureField', type: struct.Buffer(64)}
+					]);
+					msgLen = msgHeader.encodingLength({
+						magic: 0,
+						command: '',
+						length: 0,
+						checksum: new Buffer('01234567', 'hex'),
+						version: 0,
+						commandSize: 0,
+						timestampSize: 0,
+						oldSizeField: 0,
+						sizeField: 0,
+						pubkeyField: new Buffer('040000000000000000000000000000000000000000000000000000000000000000', 'hex'),
+						rawSignatureField: new Buffer('00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000', 'hex')
+					});
+
+					try {
+						message = msgHeader.decode(bl.slice(0, msgLen));
+					} catch (err) {
+						return cb(err);
+					}
+
+					console.log(message.checksum);
+					console.log(getChecksum(bl.slice(msgLen + 1, message.length)));
+				}*/
 
 				if (opts.magic && message.magic !== opts.magic) {
 					return cb(new Error('Magic value in message ' +
@@ -52,7 +92,7 @@ exports.createDecodeStream = function (opts) {
 					return cb(new Error('Unrecognized command: "' + message.command + '"'))
 				}
 
-				bl.consume(msgHeader.decode.bytes)
+				bl.consume(msgHeader.decode.bytes);
 			}
 			if (message.length > bl.length) break;
 
@@ -61,12 +101,12 @@ exports.createDecodeStream = function (opts) {
 			if (!bufferEquals(checksum, message.checksum)) {
 				return cb(new Error('Invalid message checksum. ' +
 					'In header: "' + message.checksum.toString('hex') + '", ' +
-					'calculated: "' + checksum.toString('hex') + '"'))
+					'calculated: "' + checksum.toString('hex') + '"'));
 			}
 
 			let command = messages[message.command];
 			if (typeof command === 'function') {
-				command = command(message, payload)
+				command = command(message, payload);
 			}
 
 			try {
@@ -74,11 +114,12 @@ exports.createDecodeStream = function (opts) {
 			} catch (err) {
 				console.log(payload);
 				console.log(payload.length);
+
 				return cb(err);
 			}
 			if (command.decode.bytes !== message.length) {
-				//return cb(new Error('Message (command ' + message.command + ') length did not match header. ' +
-					//'In header: ' + message.length + ', read: ' + command.decode.bytes))
+				return cb(new Error('Message (command ' + message.command + ') length did not match header. ' +
+					'In header: ' + message.length + ', read: ' + command.decode.bytes));
 			}
 
 			bl.consume(message.length);
@@ -98,11 +139,16 @@ exports.createEncodeStream = function (opts) {
 			return cb(new Error('Unrecognized command: "' + chunk.command + '"'))
 		}
 
+		if (command === 'xbridge') {
+			msgHeader += types.xbridgeHeader;
+			//msgLen = msgHeader.encodingLength();
+		}
+
 		let payload;
 		try {
 			payload = command.encode(chunk.payload || {})
 		} catch (err) {
-			return cb(err)
+			return cb(err);
 		}
 
 		payload = payload.slice(0, command.encode.bytes);
@@ -114,9 +160,9 @@ exports.createEncodeStream = function (opts) {
 		}
 		let header;
 		try {
-			header = msgHeader.encode(chunk)
+			header = msgHeader.encode(chunk);
 		} catch (err) {
-			return cb(err)
+			return cb(err);
 		}
 
 		this.push(header);

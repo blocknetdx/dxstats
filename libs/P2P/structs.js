@@ -71,7 +71,7 @@ function createStructs(overrideTypes) {
 	return createMessages({
 		// Data Messages
 		block: struct([
-			{name: 'header', type: types.header},
+			{name: 'header', type: types.standardHeader},
 			{name: 'transactions', type: struct.VarArray(varint, types.transaction)}
 		]),
 		getblocks: struct([
@@ -86,13 +86,13 @@ function createStructs(overrideTypes) {
 			{name: 'hashStop', type: types.buffer32}
 		]),
 		headers: struct.VarArray(varint, struct([
-			{name: 'header', type: types.header},
+			{name: 'header', type: types.standardHeader},
 			{name: 'numTransactions', type: varint}
 		])),
 		inv: struct.VarArray(varint, types.inventoryVector),
 		mempool: struct([]),
 		merkleblock: struct([
-			{name: 'header', type: types.header},
+			{name: 'header', type: types.standardHeader},
 			{name: 'numTransactions', type: struct.UInt32LE},
 			{name: 'hashes', type: struct.VarArray(varint, types.buffer32)},
 			{name: 'flags', type: types.varBuffer}
@@ -154,17 +154,6 @@ function createStructs(overrideTypes) {
 			{name: 'currency', type: struct.VarString(varint, 'ascii')}
 		]),
 		/*xbridge: struct([
-			{name: 'version', type: struct.UInt32LE},
-			{name: 'commandField', type: struct.UInt32LE},
-			{name: 'timestamp', type: struct.UInt32LE},
-			{name: 'size', type: struct.UInt32LE},
-			{name: 'extSize', type: struct.UInt32LE},
-			{name: 'crc', type: struct.UInt32LE},
-			{name: 'reservedHeaderField1', type: struct.UInt32LE},
-			{name: 'reservedHeaderField2', type: struct.UInt32LE},
-			{name: 'body', type: types.varBuffer}
-		]),*/
-		xbridge: struct([
 			{name: 'header', type: types.xbridgeHeader},
 			{name: 'hubAddr', type: struct.Buffer(20)},
 			{name: 'id', type: struct.Buffer(32)},
@@ -172,15 +161,18 @@ function createStructs(overrideTypes) {
 			{name: 'sourceCurrency', type: struct.Buffer(8)},
 			{name: 'sourceAmt', type: struct.Buffer(8)},
 			{name: 'destAddr', type: struct.Buffer(20)},
-			{name: 'destCurrency', type: struct.Buffer(10)},
+			{name: 'destCurrency', type: struct.Buffer(8)},
 			{name: 'destAmt', type: struct.Buffer(8)},
+			{name: 'outputAmt', type: struct.Buffer(8)},
             {name: 'txids', type: struct.VarArray(varint, struct([
-            	{name: 'index', type: struct.Buffer(4)},
             	{name: 'txids', type: struct.VarArray(varint, struct([
 					{name: 'txid', type: struct.Buffer(32)},
 					{name: 'outId', type: struct.UInt32LE}
 				]))}
 			]))}
+		]),*/
+		xbridge: struct([
+			{name: 'rawXbridgePacket', type: types.xbridge}
 		]),
 		ssc: struct([
 			{name: 'rawSSCPacket', type: types.varBuffer}

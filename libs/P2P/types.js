@@ -3,7 +3,7 @@ let struct = require('varstruct');
 let varint = require('varuint-bitcoin');
 let ip = require('ip');
 let bufferEquals = require('buffer-equals');
-//const bufferReverse = require('buffer-reverse');
+const bufferReverse = require('buffer-reverse');
 
 exports.buffer8 = struct.Buffer(8);
 exports.buffer32 = struct.Buffer(32);
@@ -103,7 +103,7 @@ exports.messageCommand = (function () {
 
 	function decode(buffer, offset, end) {
 		let bvalue = buffer12.decode(buffer, offset, end);
-		for (var stop = 0; bvalue[stop] !== 0; ++stop);
+		for (var stop = 0; bvalue[stop] !== 0; ++stop) ;
 		for (let i = stop; i < bvalue.length; ++i) {
 			if (bvalue[i] !== 0) throw new Error('Found a non-null byte after the first null byte in a null-padded string');
 		}
@@ -139,7 +139,7 @@ exports.transaction = struct([
 	{name: 'locktime', type: struct.UInt32LE}
 ]);
 
-exports.header = struct([
+exports.standardHeader = struct([
 	{name: 'version', type: struct.Int32LE},
 	{name: 'prevHash', type: exports.buffer32},
 	{name: 'merkleRoot', type: exports.buffer32},
@@ -149,16 +149,27 @@ exports.header = struct([
 ]);
 
 exports.xbridgeHeader = struct([
-    {name: 'version', type: struct.Buffer(4)},
-    {name: 'commandSize', type: struct.Buffer(4)},
-    {name: 'timestampSize', type: struct.Buffer(4)},
-    {name: 'oldSizeField', type: struct.Buffer(4)},
-    {name: 'sizeField', type: struct.Buffer(4)},
-    {name: 'pubkeyField', type: exports.varBuffer},
-    {name: 'signatureField', type: exports.varBuffer}
+	{name: 'version', type: struct.Buffer(4)},
+	{name: 'commandSize', type: struct.Buffer(4)},
+	{name: 'timestampSize', type: struct.Buffer(4)},
+	{name: 'oldSizeField', type: struct.Buffer(4)},
+	{name: 'sizeField', type: struct.Buffer(4)},
+	{name: 'pubkeyField', type: struct.Buffer(33)},
+	{name: 'signatureField', type: struct.Buffer(64)}
 ]);
 
-exports.xbridge = (function() {
+/*exports.xbridgeHeader = struct([
+	{name: 'version', type: struct.UInt32LE},
+	{name: 'commandField', type: struct.UInt32LE},
+	{name: 'timestamp', type: struct.UInt32LE},
+	{name: 'size', type: struct.UInt32LE},
+	{name: 'extSize', type: struct.UInt32LE},
+	{name: 'crc', type: struct.UInt32LE},
+	{name: 'reservedHeaderField1', type: struct.UInt32LE},
+	{name: 'reservedHeaderField2', type: struct.UInt32LE}
+]);*/
+
+exports.xbridge = (function () {
 	let xbuffer = exports.varBuffer;
 	let gbuffer, gvalue;
 
@@ -168,28 +179,42 @@ exports.xbridge = (function() {
 			gbuffer = buffer;
 		}
 		if (!offset) offset = 0;
-		console.log("Xbridge encoding buffer length = " + buffer.length);
+		console.log('Xbridge encoding buffer length = ' + buffer.length);
 		//xbuffer = buffer.length;
 		gbuffer = xbuffer.encode(value, buffer, offset);
-		encode.bytes = decode.bytes = gbuffer.length - offset;
+		encode.bytes = decode.bytes = gbuffer.length;
 		return gbuffer;
 	}
 
 	function decode(buffer, offset, end) {
 		if (!offset) offset = 0;
 		if (!end) end = buffer.length;
-		//xbuffer = struct.Buffer(buffer.length);
-		console.log("Xbridge offset = " + offset);
-		console.log("Xbridge length = " + buffer.length);
+		//let headerBuffer = exports.xbridgeHeader;
+		let headerLength = exports.xbridgeHeader.encodingLength({
+			version: 0,
+			commandSize: 7,
+			timestampSize: 4,
+			oldSizeField: 0,
+			sizeField: 0,
+			pubkeyField: new Buffer('040000000000000000000000000000000000000000000000000000000000000000', 'hex'),
+			signatureField: new Buffer('00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000', 'hex')
+		});
+		//let headerValue = headerBuffer.decode(buffer, offset, headerLength);
+
+		xbuffer = struct.Buffer(buffer.length);
+		console.log('Xbridge header length = ' + headerLength);
+		console.log('Xbridge header = ' + Buffer.from(bufferReverse(buffer.slice(0, headerLength))).toString('hex'));
+		console.log('Xbridge offset = ' + offset);
+		console.log('Xbridge length = ' + buffer.length);
 		gvalue = xbuffer.decode(buffer, offset, end);
-		encode.bytes = decode.bytes = gvalue.length - offset;
+		encode.bytes = decode.bytes = gvalue.length;
 		return gvalue;
 	}
 
 	encode.bytes = decode.bytes = -1;
 
 	return {
-		encode: encode, decode: decode, encodingLength: function() {
+		encode: encode, decode: decode, encodingLength: function () {
 			if (gbuffer) return gbuffer.length; else return gvalue.length;
 		}
 	}
