@@ -138,17 +138,17 @@ function createStructs(overrideTypes) {
 			{name: 'startHeight', type: struct.Int32LE},
 			{name: 'relay', type: types.boolean}
 		]), /*,
-    xbcPendingTransaction: struct([
-      { name: 'hashSize' },
-      { name: 'fc' },
-      { name: 'tra' },
-      { name: 'sc' },
-      { name: 'trb' },
-      { name: 'm_myid' },
-      { name: 'createdTime' },
-      { name: 'blockHash' },
-      { name: 'sign' }
-    ])*/
+		xbcPendingTransaction: struct([
+		  { name: 'hashSize' },
+		  { name: 'fc' },
+		  { name: 'tra' },
+		  { name: 'sc' },
+		  { name: 'trb' },
+		  { name: 'm_myid' },
+		  { name: 'createdTime' },
+		  { name: 'blockHash' },
+		  { name: 'sign' }
+		])*/
 		processGetBlockCount: struct([
 			{name: 'uuid', type: struct.VarString(varint, 'ascii')},
 			{name: 'currency', type: struct.VarString(varint, 'ascii')}
@@ -172,10 +172,21 @@ function createStructs(overrideTypes) {
 			]))}
 		]),*/
 		xbridge: struct([
-			{name: 'rawXbridgePacket', type: types.xbridge}
+			{name: 'xbridgePacket', type: types.xbridge}
+		]),
+		//begin masternode commands
+		mnget: struct([
+			{name: 'mnCount', type: struct.Int32LE}
+		]),
+		mnp: struct([
+			{name: 'vin', type: struct.Buffer(41)},
+			{name: 'blockHash', type: struct.Buffer(32)},
+			{name: 'sigTime', type: struct.Int64LE},
+			{name: 'vchSig', type: types.varBuffer}
 		]),
 		ssc: struct([
-			{name: 'rawSSCPacket', type: types.varBuffer}
+			{name: 'itemId', type: struct.Int32LE},
+			{name: 'count', type: struct.Int32LE}
 		])
 	})
 }

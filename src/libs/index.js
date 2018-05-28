@@ -1,65 +1,52 @@
-const dns = require('dns');
+//const dns = require('dns');
 const net = require('net');
-const coinParams = require('../config/coins.js');
+const coinParams = require('../../config/coins.js');
 const network = require('./P2P');
 const bufferReverse = require('buffer-reverse');
+const settings = require('electron-settings');
 
 'use strict';
 
+let coins = {};
+
 class Coin {
 	constructor(network) {
-		this.network = network
+		this.network = network;
 	}
 
 	init() {
 		console.log('test');
 		console.log('init: ' + this.network.name + ' api');
-		this.createConnectionToPeer()
+		this.createConnectionToPeer();
 	}
 
 	// writedata for future use
 	createConnectionToPeer() {
-		var decoder = network.createDecodeStream(),
+		let decoder = network.createDecodeStream(),
 			self = this;
 		decoder.on('data', function (message) {
 			//console.log(message)
-			if (message.payload) {
-				var buf = Buffer.from(JSON.stringify(message.payload));
-				var temp = JSON.parse(buf.toString('utf8'));
-				//console.log(temp)
+            if (message.payload) {
+				let buf = Buffer.from(JSON.stringify(message.payload));
+				let temp = JSON.parse(buf.toString('utf8'));
 
-				/*if (message.command == 'xbridge') {
-					console.log(temp);
-					console.log((Buffer.from(bufferReverse(new Buffer(temp.header.version.data, 'hex')))).toString('hex'));
-                    console.log((Buffer.from(bufferReverse(new Buffer(temp.header.commandSize.data, 'hex')))).toString('hex'));
-                    console.log((Buffer.from(bufferReverse(new Buffer(temp.header.oldSizeField.data, 'hex')))).toString('hex'));
-                    console.log((Buffer.from(bufferReverse(new Buffer(temp.header.sizeField.data, 'hex')))).toString('hex'));
-                    console.log((Buffer.from(bufferReverse(new Buffer(temp.header.pubkeyField.data, 'hex')))).toString('hex'));
-                    console.log((Buffer.from(bufferReverse(new Buffer(temp.header.signatureField.data, 'hex')))).toString('hex'));
-
-                    console.log((Buffer.from(bufferReverse(new Buffer(temp.hubAddr.data, 'hex')))).toString('hex'));
-                    console.log((Buffer.from(bufferReverse(new Buffer(temp.id.data, 'hex')))).toString('hex'));
-                    console.log((Buffer.from(bufferReverse(new Buffer(temp.sourceAddr.data, 'hex')))).toString('hex'));
-                    console.log((Buffer.from(bufferReverse(new Buffer(temp.sourceCurrency.data, 'hex')))).toString('hex'));
-                    console.log((Buffer.from(bufferReverse(new Buffer(temp.sourceAmt.data, 'hex')))).toString('hex'));
-
-                    console.log((Buffer.from(bufferReverse(new Buffer(temp.destAddr.data, 'hex')))).toString('hex'));
-                    console.log((Buffer.from(bufferReverse(new Buffer(temp.destCurrency.data, 'hex')))).toString('hex'));
-                    console.log((Buffer.from(bufferReverse(new Buffer(temp.destAmt.data, 'hex')))).toString('hex'));
-				}*/
+				if (message.command === 'xbridge') {
+                    settings.set('xPacket', {
+                    	payload: message.payload
+                    })
+				}
 
 				if (typeof temp[0] !== 'undefined') {
 					if (temp.length > 0) {
-						for (var i = 0; i < temp.length; i++) {
+						for (let i = 0; i < temp.length; i++) {
 							if (temp[i].type === 2) {
 								let bufferOriginal = Buffer.from(bufferReverse(new Buffer(temp[i].hash.data, 'hex')));
-								console.log(bufferOriginal.toString('hex'))
+								console.log(bufferOriginal.toString('hex'));
 							} else if (temp[i].type === 2) {
 								let bufferOriginal = Buffer.from(bufferReverse(new Buffer(temp[i].hash.data, 'hex')));
-								console.log(bufferOriginal.toString('hex'))
+								console.log(bufferOriginal.toString('hex'));
 							}
 						}
-
 					}
 				}
 			}
@@ -86,7 +73,7 @@ class Coin {
 
 		let x = [];
 		for (let i = 0; i < arr.length; i++) {
-			x[i] = Buffer.from(arr[i], 'hex')
+			x[i] = Buffer.from(arr[i], 'hex');
 		}
 
 		return {
@@ -144,8 +131,6 @@ class Coin {
 
 coinParams.forEach(function (coinParam) {
 	if (coinParam.useCoin) {
-		new Coin(coinParam).init();
+		coins[coinParam.name] = new Coin(coinParam).init();
 	}
 });
-
-module.exports = Coin;
