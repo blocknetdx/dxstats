@@ -1,7 +1,8 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import styles from './component.less';
-import {resetUID} from "../inputs";
-import config from "electron-json-config";
+import {resetUID} from '../inputs';
+import config from 'electron-json-config';
+
 const settings = require('electron-settings');
 
 const Blocknet_xBridge = () => {
@@ -27,19 +28,29 @@ class Blocknet extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            firstTime: true,
-            textInput: props.textInput,
-            selectBox: props.selectBox,
-            packets: []
+	        firstTime: true,
+	        textInput: props.textInput,
+	        selectBox: props.selectBox,
+	        packets: []
         };
-        this.originalState = this.state;
+	    //this.originalState = this.state;
         resetUID();
         this.Stream();
     }
 
     save = () => {
-        this.forceUpdate()
+	    this.forceUpdate();
     };
+
+	packetExists = (txid) => {
+		for (let i = 0; i < this.state.packets.length; i++) {
+			if (txid === this.state.packets[i].txid) {
+				return true;
+			}
+		}
+
+		return false;
+	};
 
     Stream = () => {
         console.log("testing");
@@ -56,12 +67,16 @@ class Blocknet extends Component {
 
         settings.watch('xPacket', (newPacket, oldPacket) => {
            // console.log(newPacket.payload.xbridgePacket.txid);
-            if (!this.state.packets.indexOf({txid: newPacket.payload.xbridgePacket.txid})) {
+	        if (!this.packetExists(newPacket.txid)) {
                 this.setState({
                     packets: [...this.state.packets, JSON.stringify(newPacket.payload.xbridgePacket)]
                 });
             }
-            this.forceUpdate()
+
+	        settings.set('packets', {
+		        packets: this.state.packets
+	        });
+	        this.forceUpdate();
         })
     };
 

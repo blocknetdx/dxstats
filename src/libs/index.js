@@ -33,7 +33,7 @@ class Coin {
 				if (message.command === 'xbridge') {
                     settings.set('xPacket', {
                     	payload: message.payload
-                    })
+                    });
 				}
 
 				if (typeof temp[0] !== 'undefined') {
