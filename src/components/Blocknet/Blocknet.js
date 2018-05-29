@@ -50,28 +50,31 @@ class Blocknet extends Component {
                 packets: JSON.stringify(packet.payload.xbridgePacket),
                 firstTime: false
             });
-            this.forceUpdate()
+            this.forceUpdate();
             console.log(packet.payload.xbridgePacket);
         }
 
         settings.watch('xPacket', (newPacket, oldPacket) => {
-            this.setState({
-                packets: [...this.state.packets, JSON.stringify(newPacket.payload.xbridgePacket)]
-            });
+           // console.log(newPacket.payload.xbridgePacket.txid);
+            if (!this.state.packets.indexOf({txid: newPacket.payload.xbridgePacket.txid})) {
+                this.setState({
+                    packets: [...this.state.packets, JSON.stringify(newPacket.payload.xbridgePacket)]
+                });
+            }
             this.forceUpdate()
         })
     };
 
     fullTd = (e) => {
         return (
-            <tbody>
+            <tr>
                 <td>{JSON.parse(e).timestamp}</td>
                 <td>{JSON.parse(e).sourceCurrency}</td>
                 <td>{JSON.parse(e).destCurrency}</td>
                 <td>{JSON.parse(e).sourceAmt}</td>
                 <td>{JSON.parse(e).destAmt}</td>
                 <td>{JSON.parse(e).txid}</td>
-            </tbody>
+            </tr>
         );
     };
 
@@ -94,11 +97,13 @@ class Blocknet extends Component {
                                 <th>TXID</th>
                             </tr>
                         </thead>
-                        { packetSize > 0 ? (
-                            this.state.packets.map(item => (
-                                this.fullTd(item)
-                            ))) : null
-                        }
+                        <tbody>
+                            { packetSize > 0 ? (
+                                this.state.packets.map(item => (
+                                    this.fullTd(item)
+                                ))) : null
+                            }
+                        </tbody>
                     </table>
                 </div>
                 <button className="btn btn-primary pull-right" onClick={this.save}>Save</button>
