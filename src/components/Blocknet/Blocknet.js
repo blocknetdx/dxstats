@@ -82,7 +82,7 @@ class Blocknet extends Component {
 
     fullTd = (e) => {
         return (
-            <tr>
+	        <tr key={e.txid}>
                 <td>{JSON.parse(e).timestamp}</td>
                 <td>{JSON.parse(e).sourceCurrency}</td>
                 <td>{JSON.parse(e).destCurrency}</td>

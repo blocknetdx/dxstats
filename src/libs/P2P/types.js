@@ -5,6 +5,7 @@ let SmartBuffer = require('smart-buffer').SmartBuffer;
 const pythonstruct = require('python-struct');
 let ip = require('ip');
 let bufferEquals = require('buffer-equals');
+let settings = require('electron-settings');
 //const bufferReverse = require('buffer-reverse');
 
 exports.buffer8 = struct.Buffer(8);
@@ -431,6 +432,7 @@ exports.xbridge = (function () {
 				clientAddr: readUInt160LE(reader),
 				hubAddr: readUInt160LE(reader),
 				hubTxid: readUInt256LE(reader),
+				role: reader.readUInt16LE(),
 				sourceAddr: readUInt160LE(reader),
 				sourceCurrency: pythonstruct.unpack('8s', reader.readString(8))[0].replace(/\0/g, ''),
 				sourceAmt: pythonstruct.unpack('<Q', reader.readBuffer(8))[0],
