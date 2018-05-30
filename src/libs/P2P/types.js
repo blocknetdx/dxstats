@@ -212,6 +212,26 @@ exports.xbcPendingTransaction = struct([
 	{name: 'blockHash', type: exports.buffer32}
 ]);*/
 
+function read33BytePubkey(reader) {
+	const integers = pythonstruct.unpack('<8I', reader.readBuffer(32));
+
+	let string = '';
+	for (let i in integers) {
+		let tempstring = integers[7 - i].toString(16);
+		while (tempstring.length < 8)
+			tempstring = '0' + tempstring;
+		string += tempstring;
+	}
+
+	let byte = parseInt(pythonstruct.unpack('B', reader.readBuffer(1))).toString(16);
+	if (byte.length < 2)
+		byte = '0' + byte;
+
+	string += byte;
+
+	return string;
+}
+
 function readUInt256LE(reader) {
 	const integers = pythonstruct.unpack('<8I', reader.readBuffer(32));
 
@@ -283,7 +303,18 @@ exports.xbridge = (function () {
 
 		reader.readOffset += 97; //filler (97 B) + header (32 B) = 129 bytes
 
-		if (xBridgeHeader.command === 3) {
+		if (xBridgeHeader.command === 1) { //xbcAnnounceAddresses
+			xbuffer = {
+				header: xBridgeHeader,
+				hubAddr: readUInt160LE(reader)
+			};
+		} else if (xBridgeHeader.command === 2) { //xbcXChatMessage
+			xbuffer = {
+				header: xBridgeHeader,
+				clientAddr: readUInt160LE(reader),
+				message: pythonstruct.unpack('s', reader.readString())
+			};
+		} else if (xBridgeHeader.command === 3) { //xbcTransaction
 			xbuffer = {
 				header: xBridgeHeader,
 				txid: readUInt256LE(reader),
@@ -326,8 +357,7 @@ exports.xbridge = (function () {
 			}
 
 			console.log(xbuffer);
-		} else if (xBridgeHeader.command === 4) {
-			//xbuffer = exports.xbcPendingTransaction.decode(buffer, offset, end);
+		} else if (xBridgeHeader.command === 4) { //xbcPendingTransaction
 
 			xbuffer = {
 				header: xBridgeHeader,
@@ -337,14 +367,13 @@ exports.xbridge = (function () {
 				destCurrency: pythonstruct.unpack('8s', reader.readString(8))[0].replace(/\0/g, ''),
 				destAmt: pythonstruct.unpack('<Q', reader.readBuffer(8))[0].toNumber(),
 				hubAddr: readUInt160LE(reader),
-				timestamp: pythonstruct.unpack('<q', reader.readBuffer(8))[0].toNumber(),
+				timestamp: pythonstruct.unpack('<q', reader.readBuffer(8))[0].toNumber()
 				//blockHash: readUInt256LE(reader)
 			};
 
 			//console.log(xbuffer);
 			//console.log("PASSED");
-		} else if (xBridgeHeader.command === 5) {
-			//xbuffer = exports.xbcTransactionAccepting.decode(buffer, offset, end);
+		} else if (xBridgeHeader.command === 5) { //xbcTransactionAccepting
 
 			xbuffer = {
 				header: xBridgeHeader,
@@ -383,6 +412,121 @@ exports.xbridge = (function () {
 				i++;
 			}
 
+		} else if (xBridgeHeader.command === 6) { //xbcTransactionHold
+			xbuffer = {
+				header: xBridgeHeader,
+				hubAddr: readUInt160LE(reader),
+				txid: readUInt256LE(reader)
+			};
+		} else if (xBridgeHeader.command === 7) { //xbcTransactionHoldApply
+			xbuffer = {
+				header: xBridgeHeader,
+				hubAddr: readUInt160LE(reader),
+				clientAddr: readUInt160LE(reader),
+				txid: readUInt256LE(reader)
+			};
+		} else if (xBridgeHeader.command === 8) { //xbcTransactionInit
+			xbuffer = {
+				header: xBridgeHeader,
+				clientAddr: readUInt160LE(reader),
+				hubAddr: readUInt160LE(reader),
+				hubTxid: readUInt256LE(reader),
+				sourceAddr: readUInt160LE(reader),
+				sourceCurrency: pythonstruct.unpack('8s', reader.readString(8))[0].replace(/\0/g, ''),
+				sourceAmt: pythonstruct.unpack('<Q', reader.readBuffer(8))[0],
+				destAddr: readUInt160LE(reader),
+				destCurrency: pythonstruct.unpack('8s', reader.readString(8))[0].replace(/\0/g, '')
+			};
+		} else if (xBridgeHeader.command === 9) { //xbcTransactionInitialized
+			xbuffer = {
+				header: xBridgeHeader,
+				hubAddr: readUInt160LE(reader),
+				clientAddr: readUInt160LE(reader),
+				hubTxid: readUInt256LE(reader),
+				dataTxid: readUInt256LE(reader)
+			};
+		} else if (xBridgeHeader.command === 10) { //xbcTransactionCreateA
+			xbuffer = {
+				header: xBridgeHeader,
+				clientAddr: readUInt160LE(reader),
+				hubAddr: readUInt160LE(reader),
+				hubTxid: readUInt256LE(reader),
+				sourceAddr: readUInt160LE(reader),
+				dataTxid: readUInt256LE(reader),
+				opponentPubkey: read33BytePubkey(reader)
+			}
+		} else if (xBridgeHeader.command === 11) { //xbcTransactionCreatedA
+			xbuffer = {
+				header: xBridgeHeader,
+				hubAddr: readUInt160LE(reader),
+				clientAddr: readUInt160LE(reader),
+				hubTxid: readUInt256LE(reader),
+				depositTxid: pythonstruct.unpack('32s', reader.readStringNT())[0]
+			}
+		} else if (xBridgeHeader.command === 12) { //xbcTransactionCreateB
+			xbuffer = {
+				header: xBridgeHeader,
+				clientAddr: readUInt160LE(reader),
+				hubAddr: readUInt160LE(reader),
+				hubTxid: readUInt256LE(reader),
+				destAddr: pythonstruct.unpack('s', reader.readStringNT())[0],
+				hubWalletAddr: pythonstruct.unpack('s', reader.readStringNT())[0],
+				fee: reader.readUInt32LE(),
+				dataTxid: readUInt256LE(reader),
+				opponentPubkey: read33BytePubkey(reader),
+				depositTxid: pythonstruct.unpack('32s', reader.readStringNT())[0]
+			}
+		} else if (xBridgeHeader.command === 13) { //xbcTransactionCreatedB
+			xbuffer = {
+				header: xBridgeHeader,
+				hubAddr: readUInt160LE(reader),
+				clientAddr: readUInt160LE(reader),
+				hubTxid: readUInt256LE(reader),
+				depositTxid: pythonstruct.unpack('32s', reader.readStringNT())[0]
+			};
+		} else if (xBridgeHeader.command === 18) { //xbcTransactionConfirmA
+			xbuffer = {
+				header: xBridgeHeader,
+				clientAddr: readUInt160LE(reader),
+				hubAddr: readUInt160LE(reader),
+				depositTxid: pythonstruct.unpack('32s', reader.readStringNT())[0]
+			};
+		} else if (xBridgeHeader.command === 19) { //xbcTransactionConfirmedA
+			xbuffer = {
+				header: xBridgeHeader,
+				hubAddr: readUInt160LE(reader),
+				clientAddr: readUInt160LE(reader),
+				hubTxid: readUInt256LE(reader),
+				pubkey: read33BytePubkey(reader)
+			};
+		} else if (xBridgeHeader.command === 20) { //xbcTransactionConfirmB
+			xbuffer = {
+				header: xBridgeHeader,
+				clientAddr: readUInt160LE(reader),
+				hubAddr: readUInt160LE(reader),
+				hubTxid: readUInt256LE(reader),
+				pubkey: read33BytePubkey(reader),
+				depositTxid: pythonstruct.unpack('32s', reader.readStringNT())[0]
+			};
+		} else if (xBridgeHeader.command === 21) { //xbcTransactionConfirmedB
+			xbuffer = {
+				header: xBridgeHeader,
+				hubAddr: readUInt160LE(reader),
+				clientAddr: readUInt160LE(reader),
+				hubTxid: readUInt256LE(reader)
+			};
+		} else if (xBridgeHeader.command === 22) { //xbcTransactionCancel
+			xbuffer = {
+				header: xBridgeHeader,
+				hubTxid: readUInt256LE(reader),
+				reason: reader.readUInt32LE()
+			};
+		} else if (xBridgeHeader.command === 24) { //xbcTransactionFinished
+			xbuffer = {
+				header: xBridgeHeader,
+				clientAddr: readUInt160LE(reader),
+				hubTxid: readUInt256LE(reader)
+			};
 		} else {
 			console.log('Unrecognized command: ' + xBridgeHeader.command);
 			return null;
