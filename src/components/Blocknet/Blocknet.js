@@ -35,8 +35,11 @@ class Blocknet extends Component {
         };
 	    //this.originalState = this.state;
         resetUID();
-        this.Stream();
     }
+
+	componentDidMount = () => {
+		this.Stream();
+	};
 
     save = () => {
 	    this.forceUpdate();
@@ -44,7 +47,7 @@ class Blocknet extends Component {
 
 	packetExists = (txid) => {
 		for (let i = 0; i < this.state.packets.length; i++) {
-			if (txid === this.state.packets[i].txid) {
+			if (txid === JSON.parse(this.state.packets[i]).txid) {
 				return true;
 			}
 		}
@@ -53,12 +56,12 @@ class Blocknet extends Component {
 	};
 
     Stream = () => {
-        console.log("testing");
+	    console.log('Stream called');
 
         if (this.state.firstTime) {
             let packet = settings.get('xPacket');
             this.setState({
-                packets: JSON.stringify(packet.payload.xbridgePacket),
+	            packets: [JSON.stringify(packet.payload.xbridgePacket)],
                 firstTime: false
             });
             this.forceUpdate();
@@ -66,8 +69,10 @@ class Blocknet extends Component {
         }
 
         settings.watch('xPacket', (newPacket, oldPacket) => {
-           // console.log(newPacket.payload.xbridgePacket.txid);
-	        if (!this.packetExists(newPacket.txid)) {
+	        console.log('packet txid = ' + newPacket.payload.xbridgePacket.txid);
+	        const exists = this.packetExists(newPacket.payload.xbridgePacket.txid);
+	        console.log('packet exists = ' + exists);
+	        if (!exists) {
                 this.setState({
                     packets: [...this.state.packets, JSON.stringify(newPacket.payload.xbridgePacket)]
                 });
@@ -77,18 +82,19 @@ class Blocknet extends Component {
 		        packets: this.state.packets
 	        });
 	        this.forceUpdate();
+	        this.Stream();
         })
     };
 
     fullTd = (e) => {
         return (
 	        <tr key={e.txid}>
-                <td>{JSON.parse(e).timestamp}</td>
-                <td>{JSON.parse(e).sourceCurrency}</td>
-                <td>{JSON.parse(e).destCurrency}</td>
-                <td>{JSON.parse(e).sourceAmt}</td>
-                <td>{JSON.parse(e).destAmt}</td>
-                <td>{JSON.parse(e).txid}</td>
+		        <td key={e.txid + '-timestamp'}>{JSON.parse(e).timestamp}</td>
+		        <td key={e.txid + '-sourceCurrency'}>{JSON.parse(e).sourceCurrency}</td>
+		        <td key={e.txid + '-destCurrency'}>{JSON.parse(e).destCurrency}</td>
+		        <td key={e.txid + '-sourceAmt'}>{JSON.parse(e).sourceAmt}</td>
+		        <td key={e.txid + '-destAmt'}>{JSON.parse(e).destAmt}</td>
+		        <td key={e.txid + '-txid'}>{JSON.parse(e).txid}</td>
             </tr>
         );
     };
