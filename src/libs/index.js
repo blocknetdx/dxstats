@@ -9,7 +9,18 @@ const settings = require('electron-settings');
 
 let coins = {};
 
+function shuffle(arr) {
+	for (let i = arr.length - 1; i > 0; i--) {
+		const j = Math.floor(Math.random() * (i + 1));
+		[arr[i], arr[j]] = [arr[j], arr[i]];
+	}
+	return arr;
+}
+
+let peerIndex;
+
 class Coin {
+
 	constructor(network) {
 		this.network = network;
 	}
@@ -17,11 +28,15 @@ class Coin {
 	init() {
 		console.log('test');
 		console.log('init: ' + this.network.name + ' api');
-		this.createConnectionToPeer();
+		for (peerIndex = 0; peerIndex < 1; peerIndex++) {
+			console.log('connecting to DNS seed ' + peerIndex + ', addr ' + this.network.dnsSeeds[peerIndex]);
+			this.createConnectionToPeer(peerIndex);
+		}
+		peerIndex--;
 	}
 
 	// writedata for future use
-	createConnectionToPeer() {
+	createConnectionToPeer(index) {
 		let decoder = network.createDecodeStream(),
 			self = this;
 		decoder.on('data', function (message) {
@@ -54,13 +69,22 @@ class Coin {
 
 		let encoder = network.createEncodeStream();
 
-		let socket = net.connect(self.network.defaultPort, self.network.dnsSeeds[0], function () {
+		let socket = net.connect(self.network.defaultPort, self.network.dnsSeeds[index], function () {
 			socket.pipe(decoder);
 			encoder.pipe(socket);
 
 			encoder.write(self.versionPayload());
 			encoder.write(self.getBlocksPayload());
 			encoder.write(self.getData());
+		});
+
+		socket.on('error', (err) => {
+			console.log('socket threw error: ' + err.message);
+			peerIndex++;
+			if (peerIndex >= self.network.dnsSeeds.length)
+				peerIndex = 0;
+			console.log('trying dns seed ' + peerIndex + ', addr ' + self.network.dnsSeeds[peerIndex]);
+			this.createConnectionToPeer(peerIndex);
 		});
 	}
 
@@ -131,6 +155,7 @@ class Coin {
 
 coinParams.forEach(function (coinParam) {
 	if (coinParam.useCoin) {
+		coinParam.dnsSeeds = shuffle(coinParam.dnsSeeds);
 		coins[coinParam.name] = new Coin(coinParam).init();
 	}
 });
