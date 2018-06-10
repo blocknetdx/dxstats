@@ -38,7 +38,12 @@ class Blocknet extends Component {
     }
 
 	componentDidMount = () => {
+		this.mounted = true;
 		this.Stream();
+	};
+
+	componentWillUnmount = () => {
+		this.mounted = false;
 	};
 
     save = () => {
@@ -78,8 +83,10 @@ class Blocknet extends Component {
                 });
             }
 
-	        this.forceUpdate();
-	        this.Stream();
+	        if (this.mounted) {
+		        this.forceUpdate();
+		        this.Stream();
+	        }
         })
     };
 

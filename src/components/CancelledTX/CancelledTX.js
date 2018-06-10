@@ -42,7 +42,12 @@ class CancelledTX extends Component {
 	}
 
 	componentDidMount = () => {
+		this.mounted = true;
 		this.Stream();
+	};
+
+	componentWillUnmount = () => {
+		this.mounted = false;
 	};
 
 	save = () => {
@@ -82,8 +87,10 @@ class CancelledTX extends Component {
 				});
 			}
 
-			this.forceUpdate();
-			this.Stream();
+			if (this.mounted) {
+				this.forceUpdate();
+				this.Stream();
+			}
 		})
 	};
 
