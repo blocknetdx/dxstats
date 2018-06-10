@@ -261,6 +261,17 @@ function readUInt160LE(reader) {
 	return string;
 }
 
+function removeAllOccurrences(arr, txid) {
+	let newArr = arr;
+
+	for (let i = 0; i < arr.length; i++) {
+		if (arr[i].txid === txid)
+			newArr = arr.splice(i, 1);
+	}
+
+	return newArr;
+}
+
 exports.xbridge = (function () {
 
 	encode.bytes = decode.bytes = 0;
@@ -301,6 +312,7 @@ exports.xbridge = (function () {
 		console.log('Xbridge command (in header) = ' + xBridgeHeader.command);
 
 		let xbuffer;
+		let add = true;
 
 		reader.readOffset += 97; //filler (97 B) + header (32 B) = 129 bytes
 
@@ -523,16 +535,22 @@ exports.xbridge = (function () {
 				hubTxid: readUInt256LE(reader),
 				reason: reader.readUInt32LE()
 			};
+			settings.set('cancelledOrders', [...settings.get('cancelledOrders'), xbuffer]);
+			add = false;
 		} else if (xBridgeHeader.command === 24) { //xbcTransactionFinished
 			xbuffer = {
 				header: xBridgeHeader,
 				clientAddr: readUInt160LE(reader),
 				hubTxid: readUInt256LE(reader)
 			};
+			settings.set('finishedOrders', [...settings.get('cancelledOrders'), xbuffer]);
+			add = false;
 		} else {
 			console.log('Unrecognized command: ' + xBridgeHeader.command);
 			return null;
 		}
+
+		settings.set('packets', add ? [...settings.get('packets'), xbuffer] : removeAllOccurrences(settings.get('packets'), xbuffer.hubTxid));
 
 		return xbuffer;
 	}

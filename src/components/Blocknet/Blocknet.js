@@ -8,7 +8,7 @@ const settings = require('electron-settings');
 const Blocknet_xBridge = () => {
     return (
         <div>
-            <h1>XBridge Packet Data</h1>
+	        <h1>Active Transactions</h1>
             <Blocknet />
         </div>
     );
@@ -61,11 +61,11 @@ class Blocknet extends Component {
         if (this.state.firstTime) {
             let packet = settings.get('xPacket');
             this.setState({
-	            packets: [JSON.stringify(packet.payload.xbridgePacket)],
+	            packets: packet === undefined ? [] : [JSON.stringify(packet.payload.xbridgePacket)],
                 firstTime: false
             });
             this.forceUpdate();
-            console.log(packet.payload.xbridgePacket);
+	        console.log(packet === undefined ? 'no packets first time' : packet.payload.xbridgePacket);
         }
 
         settings.watch('xPacket', (newPacket, oldPacket) => {
@@ -78,9 +78,6 @@ class Blocknet extends Component {
                 });
             }
 
-	        settings.set('packets', {
-		        packets: this.state.packets
-	        });
 	        this.forceUpdate();
 	        this.Stream();
         })
@@ -92,8 +89,8 @@ class Blocknet extends Component {
 		        <td key={e.txid + '-timestamp'}>{JSON.parse(e).timestamp}</td>
 		        <td key={e.txid + '-sourceCurrency'}>{JSON.parse(e).sourceCurrency}</td>
 		        <td key={e.txid + '-destCurrency'}>{JSON.parse(e).destCurrency}</td>
-		        <td key={e.txid + '-sourceAmt'}>{JSON.parse(e).sourceAmt}</td>
-		        <td key={e.txid + '-destAmt'}>{JSON.parse(e).destAmt}</td>
+		        <td key={e.txid + '-sourceAmt'}>{JSON.parse(e).sourceAmt / 1000000}</td>
+		        <td key={e.txid + '-destAmt'}>{JSON.parse(e).destAmt / 1000000}</td>
 		        <td key={e.txid + '-txid'}>{JSON.parse(e).txid}</td>
             </tr>
         );
@@ -111,10 +108,10 @@ class Blocknet extends Component {
                         <thead>
                             <tr>
                                 <th>Timestamp</th>
-                                <th>SRC Currency</th>
-                                <th>Dest Currency</th>
-                                <th>Src Amt</th>
-                                <th>Dest Amt</th>
+	                            <th>Source Currency</th>
+	                            <th>Destination Currency</th>
+	                            <th>Source Amount</th>
+	                            <th>Destination Amount</th>
                                 <th>TXID</th>
                             </tr>
                         </thead>
