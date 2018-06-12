@@ -1,0 +1,44 @@
+@import '../styles/utils/variables';
+@import '../styles/utils/mixins';
+
+app-table /deep/ {
+
+  .bn-table__row {
+    position: relative;
+  }
+  .bn-table__cell {
+    position: static;
+    span {
+      position: relative;
+      z-index: 1;
+    }
+  }
+  .percentBar {
+    display: block;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    min-width: 2px;
+    z-index: 0;
+    padding: 0;
+    opacity: 0.3;
+  }
+
+  .bn-table__section + .bn-table__section {
+    margin-top: 0;
+  }
+}
+
+.divider {
+  padding: 0 17px;
+  line-height: 24px;
+  background-color: rgba(1,27,54,0.6);
+  @include screen(lg) {
+    line-height: 20px;
+  }
+  span {
+    opacity: 0.4;
+    font-weight: bold;
+  }
+}

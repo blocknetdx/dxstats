@@ -1,0 +1,53 @@
+@import '../styles/utils/variables';
+
+a.close {
+  display: inline-block;
+  opacity: 0.4;
+  transition: opacity 0.26s ease;
+  vertical-align: text-bottom;
+  &:hover {
+    opacity: 1;
+    .material-icons {
+      color: $bn-red;
+    }
+  }
+
+  .material-icons {
+    float: left;
+    transition: color 0.26s ease;
+  }
+}
+
+.row-detail {
+  padding: 2px 0 8px;
+  div {
+    display: flex;
+    justify-content: space-between;
+  }
+  div + div {
+    margin-top: 15px;
+    padding-top: 5px;
+    border-top: solid 2px rgba(255,255,255,0.25);
+  }
+
+  .close {
+  	font-family: "Open Sans";
+    color: $bn-red;
+    font-weight: bold;
+    opacity: 1;
+  }
+}
+
+app-table /deep/ {
+  .bn-table__row {
+    &.canceled {
+      pointer-events: none;
+      [class*=" col-"], [class^="col-"] {
+        opacity: 0.4;
+        &:not(:last-of-type) {
+          text-decoration: line-through;
+        }
+      }
+    }
+  }
+}

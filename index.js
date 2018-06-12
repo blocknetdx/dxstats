@@ -225,12 +225,6 @@ const openAppWindow = () => {
     console.log(data)
   });
 
-  const sendKeyPair = () => {
-    appWindow.send('keyPair', keyPair);
-  };
-
-  ipcMain.on('getKeyPair', sendKeyPair);
-
   ipcMain.on('makeOrder', (e, data) => {
 
   });
@@ -333,7 +327,7 @@ const openAppWindow = () => {
   ipcMain.on('getBalances', () => sendBalances(true));
   setInterval(sendBalances, stdInterval);
 
-  ipcMain.on('setKeyPair', (e, pair) => {
+  /*ipcMain.on('setKeyPair', (e, pair) => {
     storage.setItem('keyPair', pair);
     keyPair = pair;
     sendKeyPair();
@@ -342,12 +336,11 @@ const openAppWindow = () => {
     sendMyOrders(true);
     sendOrderHistory(true);
     sendCurrentPrice(true);
-  });
+  });*/
 
   ipcMain.on('isFirstRun', e => {
     const isFirstRun = storage.getItem('isFirstRun');
     if(isFirstRun !== false) {
-      console.log(1)
       storage.setItem('isFirstRun', false);
       e.returnValue = true;
     } else {
@@ -373,7 +366,7 @@ const onReady = new Promise(resolve => app.on('ready', resolve));
     const { name } = fs.readJSONSync(path.join(__dirname, 'package.json'));
     let dataPath;
     if(process.platform === 'win32') {
-      dataPath = path.join(process.env.LOCALAPPDATA, name);
+      dataPath = path.join(process.env.LOCALAPPDATA, 'BLOCKDX-Explorer');
       fs.ensureDirSync(dataPath);
     } else {
       dataPath = app.getPath('userData');

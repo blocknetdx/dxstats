@@ -1,3 +1,18 @@
+const { app, ipcMain } = require('electron');
+const fs = require('fs-extra-promise');
+const path = require('path');
+const SimpleStorage = require('../../storage');
+
+let dataPath;
+if(process.platform === 'win32') {
+  dataPath = path.join(process.env.LOCALAPPDATA, 'BLOCKDX-Explorer');
+  fs.ensureDirSync(dataPath);
+} else {
+  dataPath = app.getPath('userData');
+}
+
+const storage = new SimpleStorage(path.join(dataPath, 'meta.json'));
+
 let appWindow = null,
     orderBook = {},
     coins = {
@@ -6,7 +21,12 @@ let appWindow = null,
       bidPairs: [],
       askPairs: [],
       activePairs: []
-    };
+    },
+    keyPair = [];
+
+exports.init = (app) => {
+  appWindow = app;
+};
 
 const check_coins = (data) => {
   if (!coins.srcPairs.includes(data.sourceCurrency)) {
@@ -33,7 +53,7 @@ const check_coins = (data) => {
   });
 
   appWindow.send('currencies', coins.srcPairs);
-  appWindow.send('activePairs', coins.activePairs);
+  appWindow.send('activePairs', coins.askPairs);
 };
 
 const det_OrderType = (data) => {
@@ -58,9 +78,11 @@ const build_OrderBook = (data) => {
       bid = [];
 
   const pair = data.sourceCurrency + '/' + data.destCurrency;
-
   const arrPair = [data.sourceCurrency, data.destCurrency];
-
+  if (keyPair === undefined) {
+    keyPair = arrPair;
+    sendKeyPair();
+  }
   const pairExists = coins.activePairs.filter(e => {
     return e[0] === data.sourceCurrency && e[1] === data.destCurrency;
   });
@@ -114,14 +136,25 @@ const build_OrderBook = (data) => {
     }
   }
   console.log(orderBook);
+  sendKeyPair();
   appWindow.send('orderBook', orderBook);
 };
 
 exports.send_xBridgeMsg = (data) => {
+  keyPair = storage.getItem('keyPair');
+  console.log(keyPair);
   check_coins(data);
   build_OrderBook(data);
 };
 
-exports.init = (app) => {
-  appWindow = app;
-};
+function sendKeyPair() {
+  appWindow.send('setNewPair', keyPair);
+}
+
+function selectMarketPair(e, arr) {
+  keyPair = arr;
+  storage.setItem('keyPair', arr);
+  sendKeyPair();
+}
+
+ipcMain.on('selectMarketPair', selectMarketPair);
