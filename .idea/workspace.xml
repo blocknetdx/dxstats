@@ -1,0 +1,1045 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="fe3d19eb-e000-4e18-ae4a-0e0c68d074d6" name="Default" comment="" />
+    <ignored path="$PROJECT_DIR$/.tmp/" />
+    <ignored path="$PROJECT_DIR$/temp/" />
+    <ignored path="$PROJECT_DIR$/tmp/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/index.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="212">
+              <caret line="301" column="27" selection-start-line="301" selection-start-column="14" selection-end-line="301" selection-end-column="27" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src-back/libs/index.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="368">
+              <caret line="46" column="83" selection-start-line="46" selection-start-column="83" selection-end-line="46" selection-end-column="83" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src-back/libs/Parsing/index.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="512">
+              <caret line="66" lean-forward="true" selection-start-line="66" selection-end-line="66" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="orderbook.service.ts" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/app/orderbook.service.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="578">
+              <caret line="66" column="40" selection-start-line="66" selection-start-column="39" selection-end-line="66" selection-end-column="40" />
+              <folding>
+                <element signature="e#0#43#0" expanded="true" />
+                <element signature="e#310#347#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="pair-selector.component.ts" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/app/pair-selector/pair-selector.component.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="203">
+              <caret line="36" column="21" selection-start-line="36" selection-start-column="9" selection-end-line="36" selection-end-column="21" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="pair-selector.component.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/app/pair-selector/pair-selector.component.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="230">
+              <caret line="32" column="23" selection-start-line="32" selection-start-column="23" selection-end-line="32" selection-end-column="23" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>pairselector</find>
+      <find>cryptoService</find>
+      <find>symb</find>
+      <find>filterCoins</find>
+      <find>MY WALLET</find>
+      <find>orderbook</find>
+      <find>'/'</find>
+      <find>select market pair</find>
+      <find>selec</find>
+      <find>Selec</find>
+      <find>sort</find>
+      <find>'orderBook</find>
+      <find>block</find>
+      <find>pair</find>
+      <find>/</find>
+      <find>symbo</find>
+      <find>`</find>
+      <find>_userWallet</find>
+      <find>_loadedSymbols</find>
+      <find>_s</find>
+      <find>symbols</find>
+      <find>activePairs</find>
+      <find>_allCoins</find>
+      <find>rows</find>
+      <find>title</find>
+      <find>coinAValid</find>
+      <find>pairTable</find>
+      <find>filteredRows</find>
+      <find>sections</find>
+      <find>model</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>Buffer(8)</replace>
+      <replace>Buffer(4)</replace>
+      <replace>UInt64LE</replace>
+      <replace>UInt32LE</replace>
+    </replaceStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="PREVIOUS_COMMIT_AUTHORS">
+      <list>
+        <option value="Arccotangent &lt;git@arccotangent.net&gt;" />
+      </list>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/node_modules/varstruct/lib/buffer.js" />
+        <option value="$PROJECT_DIR$/libs/P2P/structs.js" />
+        <option value="$PROJECT_DIR$/libs/P2P/stream.js" />
+        <option value="$PROJECT_DIR$/libs/index.js" />
+        <option value="$PROJECT_DIR$/libs/P2P/types.js" />
+        <option value="$PROJECT_DIR$/src/components/Menu/Menu.js" />
+        <option value="$PROJECT_DIR$/package.json" />
+        <option value="$PROJECT_DIR$/src/db.js" />
+        <option value="$PROJECT_DIR$/src/components/Core/Core.js" />
+        <option value="$PROJECT_DIR$/src/components/Footer/Footer.js" />
+        <option value="$PROJECT_DIR$/.babelrc" />
+        <option value="$PROJECT_DIR$/webpack.dev.config.js" />
+        <option value="$PROJECT_DIR$/dist/index.html" />
+        <option value="$PROJECT_DIR$/src/components/Blocknet/component.js" />
+        <option value="$PROJECT_DIR$/src/utils/reduxHelper.js" />
+        <option value="$PROJECT_DIR$/src/index.js" />
+        <option value="$PROJECT_DIR$/main.js" />
+        <option value="$PROJECT_DIR$/src/components/Footer/component.js" />
+        <option value="$PROJECT_DIR$/src/components/Menu/component.js" />
+        <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/config/coins.js" />
+        <option value="$PROJECT_DIR$/src/components/Blocknet/Blocknet.js" />
+        <option value="$PROJECT_DIR$/NewUI/index.js" />
+        <option value="$PROJECT_DIR$/src-back/libs/P2P/types.js" />
+        <option value="$PROJECT_DIR$/src/settings.html" />
+        <option value="$PROJECT_DIR$/src/libs/index.js" />
+        <option value="$PROJECT_DIR$/index.js" />
+        <option value="$PROJECT_DIR$/src-back/libs/P2P/index.js" />
+        <option value="$PROJECT_DIR$/src-back/libs/P2P/listeners.js" />
+        <option value="$PROJECT_DIR$/src/app/orderbook.service.ts" />
+        <option value="$PROJECT_DIR$/src/app/orderbook.component.ts" />
+        <option value="$PROJECT_DIR$/src-back/libs/index.js" />
+        <option value="$PROJECT_DIR$/src/app/app.module.ts" />
+        <option value="$PROJECT_DIR$/src/app/mainview.component.html" />
+        <option value="$PROJECT_DIR$/src/app/cryptocurrency.service.ts" />
+        <option value="$PROJECT_DIR$/src-back/libs/Parsing/index.js" />
+        <option value="$PROJECT_DIR$/src/app/pair-selector/pair-selector.component.ts" />
+        <option value="$PROJECT_DIR$/src/app/pair-selector/pair-selector.component.html" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER">
+    <package-json value="$PROJECT_DIR$/package.json" />
+  </component>
+  <component name="JsFlowSettings">
+    <service-enabled>true</service-enabled>
+    <exe-path />
+    <other-services-enabled>true</other-services-enabled>
+    <auto-save>true</auto-save>
+  </component>
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="NodeModulesDirectoryManager">
+    <handled-path value="$PROJECT_DIR$/New folder/builds/blockdx-explorer-win32-x64/resources/app/node_modules" />
+    <handled-path value="$PROJECT_DIR$/New folder/builds/blockdx-explorer-win32-x64/resources/app/scaffold/node_modules" />
+    <handled-path value="$PROJECT_DIR$/New folder/node_modules" />
+    <handled-path value="$PROJECT_DIR$/New folder/scaffold/node_modules" />
+    <handled-path value="$PROJECT_DIR$/node_modules" />
+  </component>
+  <component name="NodePackageJsonFileManager">
+    <packageJsonPaths>
+      <path value="$PROJECT_DIR$/New folder/builds/blockdx-explorer-win32-x64/resources/app/package.json" />
+      <path value="$PROJECT_DIR$/New folder/builds/blockdx-explorer-win32-x64/resources/app/scaffold/package.json" />
+      <path value="$PROJECT_DIR$/New folder/package.json" />
+      <path value="$PROJECT_DIR$/New folder/scaffold/package.json" />
+      <path value="$PROJECT_DIR$/package.json" />
+      <path value="$PROJECT_DIR$/src/amcharts/plugins/dataloader/package.json" />
+      <path value="$PROJECT_DIR$/src/amcharts/plugins/export/package.json" />
+      <path value="$PROJECT_DIR$/src/amcharts/plugins/responsive/package.json" />
+    </packageJsonPaths>
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="2560" />
+    <option name="width" value="960" />
+    <option name="height" value="1080" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="blockdx-explorer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="blockdx-explorer" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="blockdx-explorer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="blockdx-explorer" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="blockdx-explorer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="blockdx-explorer" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="blockdx-explorer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="blockdx-explorer" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="pair-selector" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="blockdx-explorer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="blockdx-explorer" type="462c0819:PsiDirectoryNode" />
+              <item name="src-back" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="blockdx-explorer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="blockdx-explorer" type="462c0819:PsiDirectoryNode" />
+              <item name="src-back" type="462c0819:PsiDirectoryNode" />
+              <item name="libs" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="javascript.nodejs.core.library.configured.version" value="10.0.0" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/libs/index.js" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="D:\blockdx-explorer\node_modules\eslint" />
+    <property name="node.js.selected.package.tslint" value="D:\blockdx-explorer\node_modules\tslint" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="restartRequiresConfirmation" value="false" />
+    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Background" />
+    <property name="ts.external.directory.path" value="$PROJECT_DIR$/node_modules/typescript/lib" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Node.js.Blocknet.js">
+    <configuration name="Blocknet.js" type="NodeJSConfigurationType" factoryName="Node.js" temporary="true" nameIsGenerated="true" path-to-js-file="Blocknet.js" working-dir="$PROJECT_DIR$/src/components/Blocknet" />
+    <configuration name="libs/index.js" type="NodeJSConfigurationType" factoryName="Node.js" path-to-js-file="libs/index.js" working-dir="$PROJECT_DIR$" />
+    <configuration name="dev" type="js.build_tools.npm" factoryName="npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="dev" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+    </configuration>
+    <configuration name="e2e" type="js.build_tools.npm" factoryName="npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="e2e" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+    </configuration>
+    <configuration name="start-app" type="js.build_tools.npm" factoryName="npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="start-app" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+    </configuration>
+    <configuration name="start" type="js.build_tools.npm" factoryName="npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="start" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+    </configuration>
+    <list>
+      <item itemvalue="Node.js.libs/index.js" />
+      <item itemvalue="Node.js.Blocknet.js" />
+      <item itemvalue="npm.dev" />
+      <item itemvalue="npm.start-app" />
+      <item itemvalue="npm.start" />
+      <item itemvalue="npm.e2e" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="npm.start-app" />
+        <item itemvalue="npm.start" />
+        <item itemvalue="npm.e2e" />
+        <item itemvalue="npm.dev" />
+        <item itemvalue="Node.js.Blocknet.js" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="fe3d19eb-e000-4e18-ae4a-0e0c68d074d6" name="Default" comment="" />
+      <created>1526662864149</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1526662864149</updated>
+      <workItem from="1526662871598" duration="2022000" />
+      <workItem from="1526676070431" duration="1540000" />
+      <workItem from="1526685768399" duration="9515000" />
+      <workItem from="1526740359747" duration="1726000" />
+      <workItem from="1526742099527" duration="1814000" />
+      <workItem from="1526746720141" duration="2807000" />
+      <workItem from="1526752710330" duration="15211000" />
+      <workItem from="1526774770197" duration="791000" />
+      <workItem from="1526803543740" duration="164000" />
+      <workItem from="1526815888431" duration="2775000" />
+      <workItem from="1526823685835" duration="3543000" />
+      <workItem from="1526834154346" duration="3548000" />
+      <workItem from="1526839450655" duration="1773000" />
+      <workItem from="1526850222271" duration="769000" />
+      <workItem from="1526853695610" duration="4525000" />
+      <workItem from="1526915737225" duration="2117000" />
+      <workItem from="1526925371004" duration="9813000" />
+      <workItem from="1526947415980" duration="3310000" />
+      <workItem from="1526991144507" duration="104000" />
+      <workItem from="1527002144376" duration="1792000" />
+      <workItem from="1527008104192" duration="1308000" />
+      <workItem from="1527013870479" duration="958000" />
+      <workItem from="1527017503603" duration="1741000" />
+      <workItem from="1527023460091" duration="14000" />
+      <workItem from="1527023493730" duration="9450000" />
+      <workItem from="1527095069631" duration="3375000" />
+      <workItem from="1527104299255" duration="1261000" />
+      <workItem from="1527117145756" duration="609000" />
+      <workItem from="1527163742444" duration="1825000" />
+      <workItem from="1527167198372" duration="2330000" />
+      <workItem from="1527171061696" duration="624000" />
+      <workItem from="1527208056786" duration="921000" />
+      <workItem from="1527259818380" duration="16525000" />
+      <workItem from="1527276966858" duration="1000" />
+      <workItem from="1527279229647" duration="12859000" />
+      <workItem from="1527294295189" duration="12000" />
+      <workItem from="1527294374332" duration="1279000" />
+      <workItem from="1527349769919" duration="6018000" />
+      <workItem from="1527358780887" duration="7959000" />
+      <workItem from="1527374411557" duration="1203000" />
+      <workItem from="1527512645280" duration="4129000" />
+      <workItem from="1527598506556" duration="6780000" />
+      <workItem from="1527615546646" duration="371000" />
+      <workItem from="1527685681290" duration="4060000" />
+      <workItem from="1527723806236" duration="599000" />
+      <workItem from="1527776277108" duration="1232000" />
+      <workItem from="1528045323023" duration="599000" />
+      <workItem from="1528204726158" duration="3702000" />
+      <workItem from="1528246173685" duration="14005000" />
+      <workItem from="1528481070229" duration="599000" />
+      <workItem from="1528645984142" duration="10337000" />
+      <workItem from="1528722155515" duration="38497000" />
+    </task>
+    <task id="LOCAL-00001" summary="Initial commit">
+      <created>1526749061694</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1526749061694</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Initial commit">
+      <created>1526749177076</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1526749177076</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Initial commit">
+      <created>1526749269816</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1526749269816</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Update xbridge header, decoder, and add 3 packet types">
+      <created>1526758917628</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1526758917628</updated>
+    </task>
+    <task id="LOCAL-00005" summary="More xbridge work">
+      <created>1526771996633</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1526771996633</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Update types.js&#10;Update structs.js">
+      <created>1526824372296</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1526824372296</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Update types.js">
+      <created>1526836882344</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1526836882344</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Update types.js&#10;Update stream.js">
+      <created>1526857899446</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1526857899446</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Update 3 files">
+      <created>1526927850076</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1526927850076</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Update types.js">
+      <created>1526949329391</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1526949329391</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Update types.js and dependencies">
+      <created>1527033929375</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1527033929375</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Update types.js and add xbridge packets">
+      <created>1527167240761</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1527167240762</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Fix command 4">
+      <created>1527279259268</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1527279259268</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Fix uint256 and uint160 reading&#10;Delete unnecessary files&#10;Update dependencies">
+      <created>1527288413323</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1527288413323</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Bugfixes and optimizations">
+      <created>1527292425045</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1527292425045</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Begin adding DB functionality and Express interface">
+      <created>1527362890810</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1527362890810</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="263084000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="2560" y="0" width="960" height="1080" extended-state="0" />
+    <editor active="true" />
+    <layout>
+      <window_info anchor="bottom" id="TODO" order="4" />
+      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.50315124" side_tool="true" weight="0.30439225" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.20122574" />
+      <window_info anchor="bottom" id="Version Control" order="9" show_stripe_button="false" />
+      <window_info id="npm" order="2" sideWeight="0.36417034" side_tool="true" visible="true" weight="0.23634453" />
+      <window_info anchor="bottom" id="Terminal" order="12" />
+      <window_info anchor="bottom" id="TypeScript" order="5" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.6358297" visible="true" weight="0.23634453" />
+      <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49684873" visible="true" weight="0.30439225" />
+      <window_info id="Favorites" order="3" side_tool="true" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" x="0" y="0" width="291" height="530" id="Documentation" order="3" side_tool="true" weight="0.3298969" />
+      <window_info anchor="bottom" id="Messages" order="10" weight="0.32903227" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Inspection" order="7" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="6" weight="0.25" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Initial commit" />
+    <MESSAGE value="Update xbridge header, decoder, and add 3 packet types" />
+    <MESSAGE value="More xbridge work" />
+    <MESSAGE value="Update types.js&#10;Update structs.js" />
+    <MESSAGE value="Update types.js&#10;Update stream.js" />
+    <MESSAGE value="Update 3 files" />
+    <MESSAGE value="Update types.js" />
+    <MESSAGE value="Update types.js and dependencies" />
+    <MESSAGE value="Update types.js and add xbridge packets" />
+    <MESSAGE value="Fix command 4" />
+    <MESSAGE value="Fix uint256 and uint160 reading&#10;Delete unnecessary files&#10;Update dependencies" />
+    <MESSAGE value="Bugfixes and optimizations" />
+    <MESSAGE value="Begin adding DB functionality and Express interface" />
+    <option name="LAST_COMMIT_MESSAGE" value="Begin adding DB functionality and Express interface" />
+    <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
+    <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/libs/P2P/stream.js</url>
+          <line>121</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/libs/P2P/stream.js</url>
+          <line>164</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/libs/P2P/stream.js</url>
+          <line>101</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <condition expression="message.command === 'xbridge' &amp;&amp; message.payload.length == 429;" language="JavaScript" />
+          <url>file://$PROJECT_DIR$/libs/P2P/stream.js</url>
+          <line>131</line>
+          <option name="timeStamp" value="53" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/libs/P2P/stream.js</url>
+          <line>117</line>
+          <option name="timeStamp" value="64" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <condition expression="offset + length &gt; end" language="JavaScript" />
+          <url>file://$PROJECT_DIR$/node_modules/varstruct/lib/buffer.js</url>
+          <line>23</line>
+          <option name="timeStamp" value="66" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="130" />
+    </breakpoint-manager>
+  </component>
+  <component name="debuggerHistoryManager">
+    <expressions id="breakpointCondition">
+      <expression>
+        <expression-string>xbuffer.header.command == 3</expression-string>
+        <language-id>JavaScript</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>xbuffer.command == 3</expression-string>
+        <language-id>JavaScript</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>offset + length &gt; end</expression-string>
+        <language-id>JavaScript</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>high &gt;= 0x00200000</expression-string>
+        <language-id>JavaScript</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>message.command === 'xbridge' &amp;&amp; message.payload.length == 429;</expression-string>
+        <language-id>JavaScript</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>message.command === 'xbridge';</expression-string>
+        <language-id>JavaScript</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>buffer.length === 429</expression-string>
+        <language-id>JavaScript</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>buffer.length == 429</expression-string>
+        <language-id>JavaScript</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+    </expressions>
+    <expressions id="evaluateExpression">
+      <expression>
+        <expression-string>reader.readOffset;</expression-string>
+        <language-id>JavaScript</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>sizeof(xbuffer[Object.keys(xbuffer)[0]]);</expression-string>
+        <language-id>JavaScript</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>xbuffer[Object.keys(xbuffer)[0]];</expression-string>
+        <language-id>JavaScript</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>xbuffer[Object.keys(xbuffer)[0]].length;</expression-string>
+        <language-id>JavaScript</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>Object.keys(xbuffer)[0].length;</expression-string>
+        <language-id>JavaScript</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>Object.keys(xbuffer);</expression-string>
+        <language-id>JavaScript</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>reader.readBuffer(8);</expression-string>
+        <language-id>JavaScript</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>reader.readBuffer(8)</expression-string>
+        <language-id>JavaScript</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>reader.readBuffer()</expression-string>
+        <language-id>JavaScript</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>gvalue.length</expression-string>
+        <language-id>JavaScript</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+    </expressions>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/components/Blocknet/Blocknet.js" />
+    <entry file="file://$PROJECT_DIR$/NewUI/src/app/app.module.ts" />
+    <entry file="file://$PROJECT_DIR$/NewUI/src/app/app.service.ts" />
+    <entry file="file://$PROJECT_DIR$/NewUI/index.js" />
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="16">
+          <caret line="6" column="5" selection-start-line="5" selection-start-column="12" selection-end-line="6" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src-back/libs/P2P/constants.js" />
+    <entry file="file://$PROJECT_DIR$/New folder/builds/blockdx-explorer-win32-x64/resources/app/src/components/Core/Core.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="32">
+          <caret line="9" selection-start-line="9" selection-end-line="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src-back/libs/P2P/stream.js" />
+    <entry file="file://$PROJECT_DIR$/src/app/openorders.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="329">
+          <caret line="69" column="4" lean-forward="true" selection-start-line="69" selection-start-column="4" selection-end-line="69" selection-end-column="32" />
+          <folding>
+            <element signature="e#0#89#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src-back/libs/P2P/types.js" />
+    <entry file="file://$PROJECT_DIR$/src/amcharts/plugins/responsive/responsive.min.js.map">
+      <provider editor-type-id="sourcemapFileViewerProvider" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="211" selection-start-column="211" selection-end-column="211" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/assets/charting_library/static/localization/translations/cs.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret column="6944" selection-start-column="6944" selection-end-column="6944" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/assets/charting_library/static/localization/translations/es.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret column="4187" selection-start-column="4187" selection-end-column="4187" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/nav-bar/nav-bar.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="51" column="38" selection-start-line="51" selection-start-column="38" selection-end-line="51" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/amcharts/plugins/export/libs/pdfmake/pdfmake.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="29894" column="12" selection-start-line="29894" selection-start-column="12" selection-end-line="29894" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/New folder/scaffold/lib/generator.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-656">
+          <caret line="4" column="7" selection-start-line="4" selection-start-column="7" selection-end-line="4" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/New folder/builds/blockdx-explorer-win32-x64/resources/app/scaffold/lib/generator.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="64">
+          <caret line="4" selection-start-line="4" selection-end-line="4" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/app.service.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="20">
+          <caret line="13" column="26" selection-start-line="13" selection-start-column="26" selection-end-line="13" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/New folder/config/coins.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="7" selection-start-column="7" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/settings.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="131" column="24" selection-start-line="131" selection-start-column="24" selection-end-line="131" selection-end-column="24" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#img#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/libs/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="112">
+          <caret line="48" column="59" selection-start-line="48" selection-start-column="59" selection-end-line="48" selection-end-column="59" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test.ts">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="15" column="17" selection-start-line="15" selection-start-column="17" selection-end-line="15" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/environments/environment.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/assets/tv/chart-dark-theme.css">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/app.component.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/app.component.ts">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="304">
+          <caret line="19" column="37" selection-start-line="19" selection-start-column="32" selection-end-line="19" selection-end-column="37" />
+          <folding>
+            <element signature="e#0#47#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/readable-stream/lib/_stream_writable.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="227">
+          <caret line="405" column="63" selection-start-line="405" selection-start-column="63" selection-end-line="405" selection-end-column="63" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src-back/libs/P2P/listeners.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="16">
+          <caret line="1" selection-start-line="1" selection-end-line="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src-back/libs/P2P/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="224">
+          <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src-back/service-node-interface.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-130">
+          <caret line="425" column="41" lean-forward="true" selection-start-line="425" selection-start-column="41" selection-end-line="425" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/New folder/src/components/Blocknet/Blocknet.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="304">
+          <caret line="91" column="78" selection-start-line="91" selection-start-column="71" selection-end-line="91" selection-end-column="78" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/orderbook.component.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/assets/charting_library/datafeed/udf/datafeed.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="219">
+          <caret line="502" column="8" selection-start-line="502" selection-start-column="8" selection-end-line="502" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="212">
+          <caret line="301" column="27" selection-start-line="301" selection-start-column="14" selection-end-line="301" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/tradehistory.service.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="230">
+          <caret line="25" column="56" selection-start-line="25" selection-start-column="52" selection-end-line="25" selection-end-column="56" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/balances.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="128">
+          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+          <folding>
+            <element signature="e#0#56#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/mainview.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="122" column="54" selection-start-line="122" selection-start-column="54" selection-end-line="122" selection-end-column="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/app.module.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="173">
+          <caret line="111" column="19" lean-forward="true" selection-start-line="111" selection-start-column="19" selection-end-line="111" selection-end-column="19" />
+          <folding>
+            <element signature="e#0#58#0" expanded="true" />
+            <element signature="e#937#995#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/orderbook.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="326">
+          <caret line="47" column="28" selection-start-line="47" selection-start-column="21" selection-end-line="47" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/readable-stream/lib/_stream_readable.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="227">
+          <caret line="283" column="11" selection-start-line="283" selection-start-column="11" selection-end-line="283" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/cryptocurrency.service.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="368">
+          <caret line="50" column="36" selection-start-line="50" selection-start-column="26" selection-end-line="50" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/orderform.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3219">
+          <caret line="6" column="9" selection-start-line="6" selection-start-column="9" selection-end-line="6" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src-back/libs/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="368">
+          <caret line="46" column="83" selection-start-line="46" selection-start-column="83" selection-end-line="46" selection-end-column="83" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/pair-selector/valid-coin.directive.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="640">
+          <caret line="40" column="19" lean-forward="true" selection-start-line="40" selection-start-column="19" selection-end-line="40" selection-end-column="19" />
+          <folding>
+            <element signature="e#0#61#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/orderbook.service.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="578">
+          <caret line="66" column="40" selection-start-line="66" selection-start-column="39" selection-end-line="66" selection-end-column="40" />
+          <folding>
+            <element signature="e#0#43#0" expanded="true" />
+            <element signature="e#310#347#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src-back/libs/Parsing/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="512">
+          <caret line="66" lean-forward="true" selection-start-line="66" selection-end-line="66" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/pair-selector/pair-selector.component.spec.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#73#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/pair-selector/pair-selector.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="203">
+          <caret line="36" column="21" selection-start-line="36" selection-start-column="9" selection-end-line="36" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/pair-selector/pair-selector.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="230">
+          <caret line="32" column="23" selection-start-line="32" selection-start-column="23" selection-end-line="32" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>
