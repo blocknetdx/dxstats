@@ -1,0 +1,138 @@
+<div class="container-fluid">
+
+  <!-- Desktop -->
+  <div class="row" *isBp="['lg', 'xl']">
+
+    <div class="sidebar col-lg">
+      <div class="trade_table row">
+
+          <bn-card class="trade_table__cell balances col-lg-12" [allowFullscreen]="false">
+            <bn-card-title></bn-card-title>
+            <bn-card-body>
+            </bn-card-body>
+          </bn-card>
+
+          <bn-card class="trade_table__cell orderform col-lg-12" [allowFullscreen]="false">
+            <bn-card-title></bn-card-title>
+            <bn-card-body>
+
+            </bn-card-body>
+          </bn-card>
+
+      </div>
+    </div>
+
+    <div class="content col-lg">
+      <div class="trade_table row">
+
+        <bn-card class="trade_table__cell col-lg-6">
+          <bn-card-title>Price Chart</bn-card-title>
+          <bn-card-body>
+            <app-pricechart></app-pricechart>
+          </bn-card-body>
+        </bn-card>
+
+        <bn-card class="trade_table__cell col-lg-2" [allowFullscreen]="false">
+          <bn-card-title>Depth Chart</bn-card-title>
+          <bn-card-body>
+            <app-depth></app-depth>
+          </bn-card-body>
+        </bn-card>
+
+        <bn-card class="trade_table__cell col-lg-4">
+          <bn-card-toolbar>
+            <ng-template #toolbar>
+              <bn-select class="compact"
+                [options]="decimalOptions"
+                [initialSelectedIndex]="initialDecimalIdx"
+                (onSelectChange)="setPriceDecimal($event)">
+              </bn-select>
+            </ng-template>
+          </bn-card-toolbar>
+          <bn-card-title>Order Book</bn-card-title>
+          <bn-card-body>
+            <app-orderbook></app-orderbook>
+          </bn-card-body>
+        </bn-card>
+
+        <app-bn-tab-view class="trade_table__cell card orders col-lg-8">
+          <bn-tab label="Open Orders">
+            <ng-template #content>
+              <app-openorders></app-openorders>
+            </ng-template>
+          </bn-tab>
+          <bn-tab label="Filled Orders">
+            <ng-template #content>
+              <bn-filled-orders></bn-filled-orders>
+            </ng-template>
+          </bn-tab>
+        </app-bn-tab-view>
+
+        <bn-card class="trade_table__cell history col-lg-4">
+          <bn-card-title>Trade History</bn-card-title>
+          <bn-card-body>
+            <!-- <app-tradehistory></app-tradehistory> -->
+          </bn-card-body>
+        </bn-card>
+
+      </div>
+
+    </div>
+  </div>
+  <!-- End Desktop -->
+
+  <!-- Mobile and Tablet -->
+  <div class="row" *isBp="['xs', 'sm', 'md']">
+    <div class="col mobile-content">
+      <div #trade>
+      </div>
+      <div class="book" #book>
+        <app-orderbook #orderbook></app-orderbook>
+      </div>
+      <div #charts>
+        <app-bn-tab-view>
+          <bn-tab label="Price Chart">
+            <ng-template #content>
+              <!--<app-pricechart></app-pricechart>-->
+            </ng-template>
+          </bn-tab>
+          <bn-tab label="Depth Chart">
+            <ng-template #content>
+              <app-depth></app-depth>
+            </ng-template>
+          </bn-tab>
+        </app-bn-tab-view>
+      </div>
+
+      <div #orders>
+        <app-bn-tab-view>
+          <bn-tab label="Open Orders">
+            <ng-template #content>
+              <app-openorders></app-openorders>
+            </ng-template>
+          </bn-tab>
+          <bn-tab label="Filled Orders">
+            <ng-template #content>
+              <bn-filled-orders></bn-filled-orders>
+            </ng-template>
+          </bn-tab>
+        </app-bn-tab-view>
+      </div>
+
+      <div #history>
+        <!-- <app-tradehistory></app-tradehistory> -->
+      </div>
+
+    </div>
+
+    <app-bottom-nav (onNavChange)="onNavChange($event)">
+      <app-nav-button [views]="[trade]">Trade</app-nav-button>
+      <app-nav-button [views]="[book]">Book</app-nav-button>
+      <app-nav-button [views]="[charts]">Charts</app-nav-button>
+      <app-nav-button [views]="[orders]">Orders</app-nav-button>
+      <app-nav-button [views]="[history]">History</app-nav-button>
+    </app-bottom-nav>
+
+  </div>
+  <!-- End Mobile and Tablet -->
+</div>

@@ -1,0 +1,19 @@
+<div [@fadeInOut] (click)="active = false" class="overlay" *ngIf="active"></div>
+
+<div class="navbar-pricing__cell" [class.active]="active" *ngIf="symbols">
+  <div class="navbar-pricing__cell_body" (click)="active = !active">
+    <div class="navbar-pricing__upper">{{symbols[0]}} / {{symbols[1]}}</div>
+    <div class="navbar-pricing__lower">Select market pair</div>
+  </div>
+
+  <div [@fadeInOut] class="pair-container" *ngIf="active">
+    <table ngClass="bn-table" style="width:100%;">
+      <tr>
+        <th style="text-align:initial;height:10px;padding:7px;">Pair</th>
+      </tr>
+      <tr *ngFor="let item of allCoins" ngClass="bn-table__row row first-coin-info" (click)="changePair(item)">
+        <td ngClass="coin-cell currency-cell" style="padding:10px;">{{item[0]}}/{{item[1]}}</td>
+      </tr>
+    </table>
+  </div>
+</div>
