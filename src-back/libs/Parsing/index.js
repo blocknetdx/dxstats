@@ -73,9 +73,8 @@ const det_OrderType = (data) => {
 };
 
 const build_OrderBook = (data) => {
-  let type = det_OrderType(data),
-      ask = [],
-      bid = [];
+  const type = det_OrderType(data);
+  let ask = [], bid = [];
 
   const pair = data.sourceCurrency + '/' + data.destCurrency;
   const arrPair = [data.sourceCurrency, data.destCurrency];
@@ -87,7 +86,7 @@ const build_OrderBook = (data) => {
     return e[0] === data.sourceCurrency && e[1] === data.destCurrency;
   });
 
-  if (pairExists == false) {
+  if (pairExists === false) {
     coins.activePairs.push(arrPair);
   }
 
@@ -112,7 +111,7 @@ const build_OrderBook = (data) => {
     const bidExists = orderBook[pair].bids.filter(e => {
       return e.txid === data.txid;
     });
-    if (bidExists == false) {
+    if (bidExists === false) {
       orderBook[pair].bids.push(bid);
     } else if (orderBook[pair].bids.length === 0) {
       orderBook[pair].asks.push(ask);
@@ -129,7 +128,7 @@ const build_OrderBook = (data) => {
     const askExists = orderBook[pair].asks.filter(e => {
       return e.txid === data.txid;
     });
-    if (askExists == false) {
+    if (askExists === false) {
       orderBook[pair].asks.push(ask);
     } else if (orderBook[pair].asks.length === 0) {
       orderBook[pair].asks.push(ask);

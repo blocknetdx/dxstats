@@ -76,6 +76,8 @@ export class PairSelectorComponent implements OnInit, AfterViewInit {
 
     ipcRenderer.on('setNewPair', (e, pair) => {
       this._loadedSymbols = pair;
+      if (this.active)
+        this.changePair(pair);
     });
   }
   ngAfterViewInit() {
@@ -92,6 +94,7 @@ export class PairSelectorComponent implements OnInit, AfterViewInit {
     // console.log(this.model);
     // this.router.navigate(['/trading', `${a}-${b}`]);
     window.electron.ipcRenderer.send('selectMarketPair', pair);
+    console.log('Changing pair to: ' + pair);
     this.active = false;
   }
 }

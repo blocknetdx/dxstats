@@ -237,10 +237,8 @@ exports.xbridge = (function () {
   function decode(buffer, offset, end) {
     if (!offset) offset = 31;
     if (!end) end = buffer.length;
-    //let headerBuffer = exports.xbridgeHeader;
     encode.bytes = decode.bytes = end;
 
-    //let headerValue = headerBuffer.decode(buffer, offset, offset + 32);
     const reader = SmartBuffer.fromBuffer(buffer);
     reader.readOffset = offset;
     const xBridgeHeader = {
@@ -429,13 +427,13 @@ exports.xbridge = (function () {
         header: xBridgeHeader,
         clientAddr: readUInt160LE(reader),
         hubAddr: readUInt160LE(reader),
-        hubTxid: readUInt256LE(reader),
-        destAddr: pythonstruct.unpack('s', reader.readStringNT())[0],
-        hubWalletAddr: pythonstruct.unpack('s', reader.readStringNT())[0],
-        fee: reader.readUInt32LE(),
-        dataTxid: readUInt256LE(reader),
-        opponentPubkey: read33BytePubkey(reader),
-        depositTxid: pythonstruct.unpack('32s', reader.readStringNT())[0]
+        hubTxid: readUInt256LE(reader)
+        //destAddr: pythonstruct.unpack('s', reader.readStringNT())[0],
+        //hubWalletAddr: pythonstruct.unpack('s', reader.readStringNT())[0],
+        //fee: reader.readUInt32LE(),
+        //dataTxid: readUInt256LE(reader),
+        //opponentPubkey: read33BytePubkey(reader),
+        //depositTxid: pythonstruct.unpack('32s', reader.readStringNT())[0]
       };
     } else if (xBridgeHeader.command === 13) { //xbcTransactionCreatedB
       xbuffer = {
@@ -482,6 +480,8 @@ exports.xbridge = (function () {
         hubTxid: readUInt256LE(reader),
         reason: reader.readUInt32LE()
       };
+      if (settings.get('cancelledOrders') === undefined)
+        settings.set('cancelledOrders', []);
       settings.set('cancelledOrders', [...settings.get('cancelledOrders'), xbuffer]);
       add = false;
     } else if (xBridgeHeader.command === 24) { //xbcTransactionFinished
@@ -490,10 +490,27 @@ exports.xbridge = (function () {
         clientAddr: readUInt160LE(reader),
         hubTxid: readUInt256LE(reader)
       };
+      if (settings.get('finishedOrders') === undefined)
+        settings.set('finishedOrders', []);
       settings.set('finishedOrders', [...settings.get('cancelledOrders'), xbuffer]);
       add = false;
     } else {
       console.log('Unrecognized command: ' + xBridgeHeader.command);
+      console.log('Attempting to locate beginning of header.');
+
+      const newReader = SmartBuffer.fromBuffer(buffer);
+
+      //A rather sloppy approach to finding the beginning of the header, will be optimized later
+      for (let o = 0; o < 129; o++) {
+        newReader.readOffset = o;
+        if (newReader.readUInt32LE() === 0xff000025) { //0xff000025 == expected version in little endian
+          console.log('Found beginning of header! Offset = ' + o);
+          return decode(buffer, o, end);
+        }
+      }
+
+      console.log('Could not find beginning of header.');
+
       return null;
     }
 
