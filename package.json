@@ -75,6 +75,8 @@
     "varstruct": "^6.1.2",
     "varuint-bitcoin": "^1.1.0",
     "web-animations-js": "^2.3.1",
+    "webpack": "3.11.0",
+    "webpack-dev-server": "^3.1.4",
     "zone.js": "^0.8.18"
   },
   "devDependencies": {
@@ -104,7 +106,7 @@
     "should": "^13.2.1",
     "ts-node": "^3.3.0",
     "tslint": "^5.8.0",
-    "typescript": "^2.6.2"
+    "typescript": "2.6.2"
   },
   "main": "index.js",
   "build": {

@@ -45,15 +45,8 @@ class Coin {
 				const buf = Buffer.from(JSON.stringify(message.payload));
 				const temp = JSON.parse(buf.toString('utf8'));
 
-<<<<<<< HEAD:src/libs/index.js
-				if (message.command === 'xbridge') {
-                    settings.set('xPacket', {
-                    	payload: message.payload
-                    });
-=======
 				if (message.command === 'xbridge' && message.payload.xbridgePacket !== null) {
           parsing.send_xBridgeMsg(message.payload.xbridgePacket);
->>>>>>> dev:src-back/libs/index.js
 				}
 
 				if (typeof temp[0] !== 'undefined') {
@@ -73,12 +66,7 @@ class Coin {
 		});
 
 		const encoder = network.createEncodeStream();
-
-<<<<<<< HEAD:src/libs/index.js
-		let socket = net.connect(self.network.defaultPort, self.network.dnsSeeds[index], function () {
-=======
 		const socket = net.connect(self.network.defaultPort, self.network.dnsSeeds[index], function () {
->>>>>>> dev:src-back/libs/index.js
 			socket.pipe(decoder);
 			encoder.pipe(socket);
 
@@ -162,14 +150,6 @@ class Coin {
 	}
 }
 
-<<<<<<< HEAD:src/libs/index.js
-coinParams.forEach(function (coinParam) {
-	if (coinParam.useCoin) {
-		coinParam.dnsSeeds = shuffle(coinParam.dnsSeeds);
-		coins[coinParam.name] = new Coin(coinParam).init();
-	}
-});
-=======
 exports.start = function(app) {
   parsing.init(app);
   coinParams.forEach(function (coinParam) {
@@ -179,4 +159,3 @@ exports.start = function(app) {
     }
   });
 };
->>>>>>> dev:src-back/libs/index.js
