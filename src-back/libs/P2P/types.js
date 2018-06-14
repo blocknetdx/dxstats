@@ -498,18 +498,13 @@ exports.xbridge = (function () {
       console.log('Unrecognized command: ' + xBridgeHeader.command);
       console.log('Attempting to locate beginning of header.');
 
-      const newReader = SmartBuffer.fromBuffer(buffer);
-
-      //A rather sloppy approach to finding the beginning of the header, will be optimized later
-      for (let o = 0; o < 129; o++) {
-        newReader.readOffset = o;
-        if (newReader.readUInt32LE() === 0xff000025) { //0xff000025 == expected version in little endian
-          console.log('Found beginning of header! Offset = ' + o);
-          return decode(buffer, o, end);
-        }
+      let o = buffer.toString('hex').indexOf('250000ff') / 2;
+      if (o === -1) {
+        console.log('Could not find beginning of header.');
+      } else {
+        console.log('Found beginning of header! Offset = ' + o);
+        return decode(buffer, o, end);
       }
-
-      console.log('Could not find beginning of header.');
 
       return null;
     }

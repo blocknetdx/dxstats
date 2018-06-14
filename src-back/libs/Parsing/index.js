@@ -28,6 +28,17 @@ exports.init = (app) => {
   appWindow = app;
 };
 
+/*
+function containsTxidCancelled(packet) {
+  for (let i = 0; i < orderBook.cancelled.length(); i++) {
+    if (packet.txid === orderBook.cancelled[i].txid)
+      return true;
+  }
+
+  return false;
+}
+*/
+
 const check_coins = (data) => {
   if (!coins.srcPairs.includes(data.sourceCurrency)) {
     coins.srcPairs.push(data.sourceCurrency);
@@ -155,7 +166,7 @@ const build_CanceledOrders = (data) => {
             takerSize: e.price,
             side: 'buy',
             type: 'Cancel',
-            created_at: e.timestamp,
+            created_at: e.timestamp / 1000,
             status: 'canceled'
           };
         }
@@ -163,9 +174,9 @@ const build_CanceledOrders = (data) => {
     });
 
     if (order.length > 0 && order[0] && order[0].orderId) {
-      console.log(order[0])
+      console.log(order[0]);
       orderBook[pair].cancelled.push(order[0]);
-      console.log(pair.split('/'))
+      console.log(pair.split('/'));
       appWindow.send('canceledOrder', orderBook[pair].cancelled, [pair.split('/')]);
     }
   }

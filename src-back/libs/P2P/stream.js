@@ -44,44 +44,6 @@ exports.createDecodeStream = function (opts) {
 					return cb(err);
 				}
 
-				/*if (message.command === 'xbridge') {
-					msgHeader = struct([
-						{name: 'magic', type: struct.UInt32LE},
-						{name: 'command', type: types.messageCommand},
-						{name: 'length', type: struct.UInt32LE},
-						{name: 'checksum', type: struct.Buffer(4)},
-						{name: 'version', type: struct.UInt32LE},
-						{name: 'commandSize', type: struct.UInt32LE},
-						{name: 'timestampSize', type: struct.UInt32LE},
-						{name: 'oldSizeField', type: struct.UInt32LE},
-						{name: 'sizeField', type: struct.UInt32LE},
-						{name: 'pubkeyField', type: struct.Buffer(33)},
-						{name: 'signatureField', type: struct.Buffer(64)}
-					]);
-					msgLen = msgHeader.encodingLength({
-						magic: 0,
-						command: '',
-						length: 0,
-						checksum: new Buffer('01234567', 'hex'),
-						version: 0,
-						commandSize: 0,
-						timestampSize: 0,
-						oldSizeField: 0,
-						sizeField: 0,
-						pubkeyField: new Buffer('040000000000000000000000000000000000000000000000000000000000000000', 'hex'),
-						rawSignatureField: new Buffer('00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000', 'hex')
-					});
-
-					try {
-						message = msgHeader.decode(bl.slice(0, msgLen));
-					} catch (err) {
-						return cb(err);
-					}
-
-					console.log(message.checksum);
-					console.log(getChecksum(bl.slice(msgLen + 1, message.length)));
-				}*/
-
 				if (opts.magic && message.magic !== opts.magic) {
 					return cb(new Error('Magic value in message ' +
 						'(' + message.magic.toString(16) + ') did not match expected ' +
