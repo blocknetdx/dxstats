@@ -13,16 +13,16 @@ if(process.platform === 'win32') {
 
 const storage = new SimpleStorage(path.join(dataPath, 'meta.json'));
 
-let appWindow = null,
-    orderBook = {},
-    coins = {
+let appWindow = null;
+const orderBook = {};
+const coins = {
       srcPairs: [],
       destPairs: [],
       bidPairs: [],
       askPairs: [],
       activePairs: []
-    },
-    keyPair = [];
+};
+let keyPair = [];
 
 exports.init = (app) => {
   appWindow = app;
@@ -102,7 +102,8 @@ const build_OrderBook = (data) => {
     orderBook[pair] = {
       asks: [],
       bids: [],
-      cancelled: []
+      cancelled: [],
+      finished: []
     };
   }
 
@@ -152,11 +153,13 @@ const build_OrderBook = (data) => {
   appWindow.send('orderBook', orderBook);
 };
 
+
 const build_CanceledOrders = (data) => {
   for (const pair in orderBook) {
     orderBook[pair].bids.filter(e => {
       return e.txid === data.hubTxid;
     });
+
     orderBook[pair].asks.map(e => {
       if (e.txid === data.hubTxid) {
         const index = orderBook[pair].asks.indexOf(e);
@@ -173,9 +176,42 @@ const build_CanceledOrders = (data) => {
             status: 'canceled',
             txid: e.txid
           };
+
           if (order.orderId) {
             orderBook[pair].cancelled.push(order);
             appWindow.send('canceledOrder', orderBook[pair].cancelled, [pair.split('/')]);
+            return;
+          }
+        }
+      }
+    });
+  }
+};
+
+const build_finishedOrders = (data) => {
+  for (const pair in orderBook) {
+    orderBook[pair].bids.filter(e => {
+      return e.txid === data.hubTxid;
+    });
+
+    orderBook[pair].asks.map(e => {
+      if (e.txid === data.hubTxid) {
+        const index = orderBook[pair].asks.indexOf(e);
+        orderBook[pair].asks.splice(index, 1);
+
+        if (e.orderId) {
+          const order = {
+            time: e.timestamp / 1000,
+            id: e.id,
+            maker: pair.split('/')[0],
+            makerSize: e.size,
+            takerSize: e.price,
+            side: 'buy'
+          };
+
+          if (order.orderId) {
+            orderBook[pair].finished.push(order);
+            appWindow.send('tradeHistory', orderBook[pair].finished, [pair.split('/')]);
             return;
           }
         }
@@ -199,6 +235,14 @@ exports.canceled_xBridgeOrder = (data) => {
 
   check_coins(data);
   build_CanceledOrders(data);
+};
+
+exports.finished_xBridgeOrder = (data) => {
+  appWindow.send('currencies', coins.srcPairs);
+  appWindow.send('activePairs', coins.activePairs);
+
+  check_coins(data);
+  build_finishedOrders(data);
 };
 
 function sendKeyPair() {
