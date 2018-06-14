@@ -7,7 +7,7 @@ const bufferReverse = require('buffer-reverse');
 
 'use strict';
 
-let coins = {};
+const coins = {};
 
 function shuffle(arr) {
 	for (let i = arr.length - 1; i > 0; i--) {
@@ -46,7 +46,11 @@ class Coin {
 				const temp = JSON.parse(buf.toString('utf8'));
 
 				if (message.command === 'xbridge' && message.payload.xbridgePacket !== null) {
-          parsing.send_xBridgeMsg(message.payload.xbridgePacket);
+				  if (message.payload.xbridgePacket.header.command === 3 || message.payload.xbridgePacket.header.command === 4) {
+            parsing.send_xBridgeMsg(message.payload.xbridgePacket);
+          } else if (message.payload.xbridgePacket.header.command === 22) {
+            parsing.canceled_xBridgeOrder(message.payload.xbridgePacket);
+          }
 				}
 
 				if (typeof temp[0] !== 'undefined') {

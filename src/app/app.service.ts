@@ -66,6 +66,6 @@ export class AppService {
 
   public updateMarketPair(pair: string[]) {
     window.electron.ipcRenderer.send('setKeyPair', pair);
-    // this.marketPairChanges.next(pair);
+    this.marketPairChanges.next(pair);
   }
 }

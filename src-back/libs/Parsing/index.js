@@ -51,9 +51,6 @@ const check_coins = (data) => {
       }
     }
   });
-
-  appWindow.send('currencies', coins.srcPairs);
-  appWindow.send('activePairs', coins.askPairs);
 };
 
 const det_OrderType = (data) => {
@@ -86,14 +83,15 @@ const build_OrderBook = (data) => {
     return e[0] === data.sourceCurrency && e[1] === data.destCurrency;
   });
 
-  if (pairExists === false) {
+  if (pairExists == false) {
     coins.activePairs.push(arrPair);
   }
 
   if (orderBook[pair] === undefined) {
     orderBook[pair] = {
       asks: [],
-      bids: []
+      bids: [],
+      cancelled: []
     };
   }
 
@@ -102,16 +100,15 @@ const build_OrderBook = (data) => {
     i=i+1;
     bid = {
       txid: data.txid,
-      srcCurr: data.sourceCurrency,
-      destCurr: data.destCurrency,
       orderId: i,
       price: data.destAmt/1000000,
-      size: data.sourceAmt/1000000
+      size: data.sourceAmt/1000000,
+      timestamp: data.timestamp
     };
     const bidExists = orderBook[pair].bids.filter(e => {
       return e.txid === data.txid;
     });
-    if (bidExists === false) {
+    if (bidExists == false) {
       orderBook[pair].bids.push(bid);
     } else if (orderBook[pair].bids.length === 0) {
       orderBook[pair].asks.push(ask);
@@ -123,12 +120,13 @@ const build_OrderBook = (data) => {
       txid: data.txid,
       orderId: i,
       price: data.destAmt/1000000,
-      size: data.sourceAmt/1000000
+      size: data.sourceAmt/1000000,
+      timestamp: data.timestamp
     };
     const askExists = orderBook[pair].asks.filter(e => {
       return e.txid === data.txid;
     });
-    if (askExists === false) {
+    if (askExists == false) {
       orderBook[pair].asks.push(ask);
     } else if (orderBook[pair].asks.length === 0) {
       orderBook[pair].asks.push(ask);
@@ -139,11 +137,55 @@ const build_OrderBook = (data) => {
   appWindow.send('orderBook', orderBook);
 };
 
+const build_CanceledOrders = (data) => {
+  let order;
+  for (const pair in orderBook) {
+    orderBook[pair].bids.filter(e => {
+      return e.txid === data.hubTxid;
+    });
+    order = orderBook[pair].asks.map(e => {
+      if (e.txid === data.hubTxid) {
+        let index = orderBook[pair].asks.indexOf(e);
+        orderBook[pair].asks.splice(index,1);
+
+        if (e.orderId) {
+          return {
+            orderId: e.orderId,
+            makerSize: e.size,
+            takerSize: e.price,
+            side: 'buy',
+            type: 'Cancel',
+            created_at: e.timestamp,
+            status: 'canceled'
+          };
+        }
+      }
+    });
+
+    if (order.length > 0 && order[0] && order[0].orderId) {
+      console.log(order[0])
+      orderBook[pair].cancelled.push(order[0]);
+      console.log(pair.split('/'))
+      appWindow.send('canceledOrder', orderBook[pair].cancelled, [pair.split('/')]);
+    }
+  }
+};
+
 exports.send_xBridgeMsg = (data) => {
-  keyPair = storage.getItem('keyPair');
+  //keyPair = storage.getItem('keyPair');
+  appWindow.send('currencies', coins.srcPairs);
+  appWindow.send('activePairs', coins.activePairs);
   console.log(keyPair);
   check_coins(data);
   build_OrderBook(data);
+};
+
+exports.canceled_xBridgeOrder = (data) => {
+  appWindow.send('currencies', coins.srcPairs);
+  appWindow.send('activePairs', coins.activePairs);
+
+  check_coins(data);
+  build_CanceledOrders(data);
 };
 
 function sendKeyPair() {

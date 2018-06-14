@@ -37,9 +37,8 @@ export class OpenordersService {
     if(!this.ordersObservable) {
       this.ordersObservable = Observable.create(observer => {
         try {
-
-          window.electron.ipcRenderer.on('myOrders', (e, orders, symbols) => {
-            // console.log('myOrders', orders);
+          window.electron.ipcRenderer.on('canceledOrder', (e, orders, symbols) => {
+             console.log('myOrders', orders);
             const firstPair = symbols[0];
             const newOrders = orders
               .map(order => {
@@ -58,7 +57,7 @@ export class OpenordersService {
                   type: order.type,
                   time_in_force: '',
                   post_only: '',
-                  created_at: order.updatedAt ? order.updatedAt : order.createdAt,
+                  created_at: order.created_at,
                   fill_fees: '',
                   filledSize: '',
                   executed_value: '',
@@ -70,8 +69,6 @@ export class OpenordersService {
             // console.log('myOrders', newOrders);
             observer.next(newOrders);
           });
-          window.electron.ipcRenderer.send('getMyOrders');
-
         } catch(err) {
           console.error(err);
         }
