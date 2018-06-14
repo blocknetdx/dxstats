@@ -153,18 +153,17 @@ const build_OrderBook = (data) => {
 };
 
 const build_CanceledOrders = (data) => {
-  let order;
   for (const pair in orderBook) {
     orderBook[pair].bids.filter(e => {
       return e.txid === data.hubTxid;
     });
-    order = orderBook[pair].asks.map(e => {
+    orderBook[pair].asks.map(e => {
       if (e.txid === data.hubTxid) {
         const index = orderBook[pair].asks.indexOf(e);
         orderBook[pair].asks.splice(index,1);
 
         if (e.orderId) {
-          return {
+          const order = {
             orderId: e.orderId,
             makerSize: e.size,
             takerSize: e.price,
@@ -174,16 +173,14 @@ const build_CanceledOrders = (data) => {
             status: 'canceled',
             txid: e.txid
           };
+          if (order.orderId) {
+            orderBook[pair].cancelled.push(order);
+            appWindow.send('canceledOrder', orderBook[pair].cancelled, [pair.split('/')]);
+            return;
+          }
         }
       }
     });
-
-    if (order.length > 0 && order[0] && order[0].orderId) {
-      console.log(order[0]);
-      orderBook[pair].cancelled.push(order[0]);
-      console.log(pair.split('/'));
-      appWindow.send('canceledOrder', orderBook[pair].cancelled, [pair.split('/')]);
-    }
   }
 };
 
