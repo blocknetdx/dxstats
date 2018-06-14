@@ -106,7 +106,11 @@ const build_OrderBook = (data) => {
     };
   }
 
-  if (type === 0) {
+  const isCancelledOrder = orderBook[pair].cancelled.filter(e => {
+    return e.txid === data.txid;
+  });
+
+  if (type === 0 && isCancelledOrder.length === 0) {
     let i = orderBook[pair].bids.length;
     i=i+1;
     bid = {
@@ -124,7 +128,7 @@ const build_OrderBook = (data) => {
     } else if (orderBook[pair].bids.length === 0) {
       orderBook[pair].asks.push(ask);
     }
-  } else if (type === 1) {
+  } else if (type === 1 && isCancelledOrder.length === 0) {
     let i = orderBook[pair].asks.length;
     i=i+1;
     ask = {
@@ -156,7 +160,7 @@ const build_CanceledOrders = (data) => {
     });
     order = orderBook[pair].asks.map(e => {
       if (e.txid === data.hubTxid) {
-        let index = orderBook[pair].asks.indexOf(e);
+        const index = orderBook[pair].asks.indexOf(e);
         orderBook[pair].asks.splice(index,1);
 
         if (e.orderId) {
@@ -167,7 +171,8 @@ const build_CanceledOrders = (data) => {
             side: 'buy',
             type: 'Cancel',
             created_at: e.timestamp / 1000,
-            status: 'canceled'
+            status: 'canceled',
+            txid: e.txid
           };
         }
       }
