@@ -246,7 +246,8 @@ exports.finished_xBridgeOrder = (data) => {
 };
 
 function refresh() {
-  console.log('refresh() called. pair = ' + keyPair);
+  const pair = keyPair[0] + '/' + keyPair[1];
+  console.log('Refreshing UI for pair ' + pair);
 
   if (orderBook === undefined) {
     return;
@@ -254,11 +255,11 @@ function refresh() {
 
   appWindow.send('orderBook', orderBook);
 
-  if (orderBook[keyPair] === undefined)
+  if (orderBook[pair] === undefined)
     return;
 
-  appWindow.send('canceledOrder', orderBook[keyPair].cancelled, [keyPair.split('/')]);
-  appWindow.send('tradeHistory', orderBook[keyPair].finished, [keyPair.split('/')]);
+  appWindow.send('canceledOrder', orderBook[pair].cancelled, [pair.split('/')]);
+  appWindow.send('tradeHistory', orderBook[pair].finished, [pair.split('/')]);
 }
 
 function sendKeyPair() {
