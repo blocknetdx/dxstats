@@ -75,7 +75,7 @@ export class PairSelectorComponent implements OnInit, AfterViewInit {
     });
 
     ipcRenderer.on('setNewPair', (e, pair) => {
-      console.log(pair)
+      console.log(pair);
       this._loadedSymbols = pair;
     });
   }
@@ -93,6 +93,6 @@ export class PairSelectorComponent implements OnInit, AfterViewInit {
     // console.log(this.model);
     // this.router.navigate(['/trading', `${a}-${b}`]);
     ipcRenderer.send('selectMarketPair', pair);
-    //this.active = false;
+    // this.active = false;
   }
 }

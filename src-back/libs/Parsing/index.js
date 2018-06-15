@@ -188,7 +188,7 @@ const build_CanceledOrders = (data) => {
   }
 };
 
-const build_finishedOrders = (data) => {
+const build_FinishedOrders = (data) => {
   for (const pair in orderBook) {
     orderBook[pair].bids.filter(e => {
       return e.txid === data.hubTxid;
@@ -242,11 +242,28 @@ exports.finished_xBridgeOrder = (data) => {
   appWindow.send('activePairs', coins.activePairs);
 
   check_coins(data);
-  build_finishedOrders(data);
+  build_FinishedOrders(data);
 };
+
+function refresh() {
+  console.log('refresh() called. pair = ' + keyPair);
+
+  if (orderBook === undefined) {
+    return;
+  }
+
+  appWindow.send('orderBook', orderBook);
+
+  if (orderBook[keyPair] === undefined)
+    return;
+
+  appWindow.send('canceledOrder', orderBook[keyPair].cancelled, [keyPair.split('/')]);
+  appWindow.send('tradeHistory', orderBook[keyPair].finished, [keyPair.split('/')]);
+}
 
 function sendKeyPair() {
   appWindow.send('setNewPair', keyPair);
+  refresh();
 }
 
 function selectMarketPair(e, arr) {
