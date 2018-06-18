@@ -246,12 +246,20 @@ exports.finished_xBridgeOrder = (data) => {
 };
 
 function refresh() {
-  const pair = keyPair[0] + '/' + keyPair[1];
-  console.log('Refreshing UI for pair ' + pair);
-
-  if (orderBook === undefined) {
+  if (keyPair[0] === undefined || keyPair[1] === undefined) {
+    console.log('Pair is undefined! Setting pair to first in list, then refreshing.');
+    keyPair = coins.activePairs[0];
+    storage.setItem('keyPair', keyPair);
+    sendKeyPair();
     return;
   }
+
+  const pair = keyPair[0] + '/' + keyPair[1];
+
+  console.log('Refreshing UI for pair ' + pair);
+
+  if (orderBook === undefined)
+    return;
 
   appWindow.send('orderBook', orderBook);
 
