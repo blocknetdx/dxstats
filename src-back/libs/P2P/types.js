@@ -492,7 +492,7 @@ exports.xbridge = (function () {
       };
       if (settings.get('finishedOrders') === undefined)
         settings.set('finishedOrders', []);
-      settings.set('finishedOrders', [...settings.get('cancelledOrders'), xbuffer]);
+      settings.set('finishedOrders', [...settings.get('finishedOrders'), xbuffer]);
       add = false;
     } else {
       console.log('Unrecognized command: ' + xBridgeHeader.command);
