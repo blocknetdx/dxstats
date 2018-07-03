@@ -201,6 +201,7 @@ const build_FinishedOrders = (data) => {
 
         if (e.orderId) {
           const order = {
+            orderId: e.orderId,
             time: e.timestamp / 1000,
             id: e.id,
             maker: pair.split('/')[0],
