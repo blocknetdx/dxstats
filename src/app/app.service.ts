@@ -19,7 +19,7 @@ export class AppService {
         });
 
         window.electron.ipcRenderer.send('getKeyPair');
-
+        window.electron.ipcRenderer.send('startP2P');
       } catch(err) {
         console.error(err);
       }

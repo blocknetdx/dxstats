@@ -8,8 +8,8 @@ import { OrderbookService } from './orderbook.service';
 import { TableComponent } from './table/table.component';
 import { AppService } from './app.service';
 import {NumberFormatPipe} from './pipes/decimal.pipe';
-// import {TradehistoryService} from './tradehistory.service';
-// import { Trade } from './trade';
+import {TradehistoryService} from './tradehistory.service';
+import { Trade } from './trade';
 // import {CurrentpriceService} from './currentprice.service';
 
 math.config({
@@ -36,7 +36,7 @@ export class OrderbookComponent implements OnInit {
     private appService: AppService,
     private numberFormatPipe: NumberFormatPipe,
     private orderbookService: OrderbookService,
-    // private tradehistoryService: TradehistoryService,
+    private tradehistoryService: TradehistoryService,
     // private currentpriceService: CurrentpriceService,
     private zone: NgZone
   ) { }

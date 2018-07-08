@@ -38,7 +38,6 @@ export class OpenordersService {
       this.ordersObservable = Observable.create(observer => {
         try {
           window.electron.ipcRenderer.on('canceledOrder', (e, orders, symbols) => {
-             console.log('myOrders', orders);
             const firstPair = symbols[0];
             const newOrders = orders
               .map(order => {

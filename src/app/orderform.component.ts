@@ -14,11 +14,12 @@ math.config({
   precision: 64
 });
 
-@Component({
+/*@Component({
   selector: 'app-orderform',
   templateUrl: './orderform.component.html',
   styleUrls: ['./orderform.component.scss']
-})
+})*/
+
 export class OrderformComponent implements OnInit {
   @ViewChild('tabView') public tabView: TabViewComponent;
   @ViewChild('typeSelect') public typeSelect: SelectComponent;

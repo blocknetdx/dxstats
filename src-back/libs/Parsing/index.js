@@ -16,11 +16,11 @@ const storage = new SimpleStorage(path.join(dataPath, 'meta.json'));
 let appWindow = null;
 const orderBook = {};
 const coins = {
-      srcPairs: [],
-      destPairs: [],
-      bidPairs: [],
-      askPairs: [],
-      activePairs: []
+  srcPairs: [],
+  destPairs: [],
+  bidPairs: [],
+  askPairs: [],
+  activePairs: []
 };
 let keyPair = [];
 
@@ -66,11 +66,11 @@ const check_coins = (data) => {
 
 const det_OrderType = (data) => {
   const ask = coins.askPairs.filter(e => {
-      return e[0] === data.sourceCurrency && e[1] === data.destCurrency;
+    return e[0] === data.sourceCurrency && e[1] === data.destCurrency;
   });
 
   const bid = coins.bidPairs.filter(e => {
-      return data.sourceCurrency === e[1] && data.destCurrency === e[0];
+    return data.sourceCurrency === e[1] && data.destCurrency === e[0];
   });
 
   if (ask) {
@@ -273,6 +273,14 @@ function refresh() {
 
 function sendKeyPair() {
   appWindow.send('setNewPair', keyPair);
+  const order = {
+    id: 12345,
+    takerSize: 11,
+    makerSize: 1,
+    maker: 'BLOCK'
+  };
+  console.log(order)
+  appWindow.send('tradeHistory', order, 'BLOCK');
   refresh();
 }
 

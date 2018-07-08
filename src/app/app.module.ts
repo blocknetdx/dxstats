@@ -26,7 +26,7 @@ import { TradehistoryComponent } from './tradehistory.component';
 import { PricechartComponent } from './pricechart.component';
 import { OpenordersComponent } from './openorders.component';
 import { OpenordersService } from './openorders.service';
-import { OrderformComponent } from './orderform.component';
+// import { OrderformComponent } from './orderform.component';
 import { OrderbookComponent } from './orderbook.component';
 import { DepthchartComponent } from './depthchart.component';
 import { DepthComponent } from './depth.component';
@@ -76,13 +76,15 @@ const dev = environment.useMockAPI ? [
 @NgModule({
   declarations: [
     AppComponent,
+    // BalancesComponent,
+    TradehistoryComponent,
     DepthchartComponent,
     DepthComponent,
     MainviewComponent,
     OpenordersComponent,
     OrderbookComponent,
+    // OrderformComponent,
     PricechartComponent,
-    // TradehistoryComponent,
     WatchlistComponent,
     NavBarComponent,
     BottomNavComponent,
@@ -126,13 +128,14 @@ const dev = environment.useMockAPI ? [
     NumberFormatPipe,
     AppService,
     BreakpointService,
+    TradehistoryService,
     CurrentpriceService,
-    BlockCurrencyPipe,
+    // BlockCurrencyPipe,
     OpenordersService,
     OrderbookService,
     WebSocketService,
-    CryptocurrencyService,
-    // TradehistoryService,
+    // CryptocurrencyService,
+    // BalancesService,
     {
       provide: PERFECT_SCROLLBAR_CONFIG,
       useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG

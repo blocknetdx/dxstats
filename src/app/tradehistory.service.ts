@@ -24,13 +24,11 @@ export class TradehistoryService {
 
   getTradehistory(): Observable<Trade[]> {
     // this.tradehistoryUrl = 'api/tradehistory_' + symbols.join('_');
-
+    const { ipcRenderer } = window.electron;
     return rx.Observable.create(observer => {
       try {
-
-        electron.ipcRenderer.on('tradeHistory', (e, tradeHistory, keyPair) => {
-
-          // console.log('tradehistory', tradeHistory);
+        ipcRenderer.on('tradeHistory', (e, tradeHistory, keyPair) => {
+          console.log('tradehistory', tradeHistory);
 
           const p = tradeHistory
             .map(h => {
@@ -65,7 +63,7 @@ export class TradehistoryService {
 
         });
 
-        electron.ipcRenderer.send('getTradeHistory');
+        ipcRenderer.send('getTradeHistory');
 
       } catch(err) {
         console.error(err);

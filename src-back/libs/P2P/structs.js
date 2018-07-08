@@ -194,7 +194,7 @@ function createStructs(overrideTypes) {
       {name: 'nTimeSigned', type: struct.Int64LE},
       {name: 'vchSig', type: types.varBuffer}
     ])
-	})
+	});
 }
 
 exports.defaultMessages = createStructs(defaultTypes);
