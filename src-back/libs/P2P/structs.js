@@ -187,7 +187,13 @@ function createStructs(overrideTypes) {
 		ssc: struct([
 			{name: 'itemId', type: struct.Int32LE},
 			{name: 'count', type: struct.Int32LE}
-		])
+		]),
+    getsporks: struct([
+      {name: 'nSporkID', type: struct.UInt32LE},
+      {name: 'nValue', type: struct.Int64LE},
+      {name: 'nTimeSigned', type: struct.Int64LE},
+      {name: 'vchSig', type: types.varBuffer}
+    ])
 	})
 }
 
