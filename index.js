@@ -1,16 +1,14 @@
 const electron = require('electron');
 const fs = require('fs-extra-promise');
 const isDev = require('electron-is-dev');
-const moment = require('moment');
 const path = require('path');
 const SimpleStorage = require('./src-back/storage');
-const ServiceNodeInterface = require('./src-back/service-node-interface');
 const serve = require('electron-serve');
-const P2Prot = require('./src-back/libs');
+const { createBgManager } = require('./src-back/background-manager');
 
 const { platform } = process;
 
-let appWindow, serverLocation, keyPair, storage, p2pPermissions, port, info;
+let appWindow, serverLocation, storage, p2pPermissions;
 
 // General Error Handler
 const handleError = err => {
@@ -147,6 +145,17 @@ const openTOSWindow = (alreadyAccepted = false) => {
   }
 };
 
+const startBackground = () => {
+  const backgroundWindow = new BrowserWindow({
+    show: false
+  });
+  try {
+    createBgManager(appWindow, backgroundWindow);
+  } catch(err) {
+    console.error(err);
+  }
+};
+
 const openAppWindow = () => {
 
   const { width, height } = electron.screen.getPrimaryDisplay().workAreaSize;
@@ -170,12 +179,7 @@ const openAppWindow = () => {
   });
 
   appWindow.once('show', () => {
-    // version check
-    const err = versionCheck(info["version"]);
-    if (err) {
-      handleError(err);
-      app.quit();
-    }
+
   });
 
   const menuTemplate = [];
@@ -214,129 +218,6 @@ const openAppWindow = () => {
 
   const appMenu = Menu.buildFromTemplate(menuTemplate);
   Menu.setApplicationMenu(appMenu);
-
-  try {
-    P2Prot.start(appWindow);
-  } catch(err) {
-    console.error(err);
-  }
-
-  ipcMain.on('xPacket', (e, data) => {
-    console.log(data)
-  });
-
-  ipcMain.on('makeOrder', (e, data) => {
-
-  });
-
-  ipcMain.on('takeOrder', (e, data) => {
-
-  });
-
-  const stdInterval = 4000;
-
-  let orderBook = {
-    maker: '',
-    taker: '',
-    bids: [],
-    asks: []
-  };
-  const sendOrderBook = force => {
-
-  };
-
-  let tradeHistory = [];
-  const sendTradeHistory = force => {
-
-  };
-  ipcMain.on('sendTradeHistory', () => sendTradeHistory(true));
-  setInterval(sendTradeHistory, stdInterval);
-
-  const sendLocalTokens = () => {
-
-  };
-  ipcMain.on('getLocalTokens', sendLocalTokens);
-
-  const sendNetworkTokens = () => {
-
-  };
-  ipcMain.on('getNetworkTokens', sendNetworkTokens);
-
-  let myOrders = [];
-  const sendMyOrders = force => {
-
-  };
-  ipcMain.on('getMyOrders', () => sendMyOrders(true));
-  setInterval(sendMyOrders, stdInterval);
-
-  let orderHistory = [];
-  const sendOrderHistory = force => {
-    const end = moment.utc().valueOf();
-    const start = moment(end).utc()
-      .subtract(1, 'd')
-      .valueOf();
-
-  };
-  ipcMain.on('getOrderHistory', () => sendOrderHistory(true));
-
-  let currentPrice = {};
-  const sendCurrentPrice = force => {
-    const end = moment.utc().valueOf();
-    const start = moment(end).utc()
-      .subtract(1, 'd')
-      .valueOf();
-
-  };
-  ipcMain.on('getCurrentPrice', () => sendCurrentPrice(true));
-  setInterval(sendCurrentPrice, stdInterval);
-
-  const sendCurrencies = async function() {
-
-  };
-  ipcMain.on('getCurrencies', sendCurrencies);
-
-  const sendCurrencyComparisons = async function(primary) {
-
-  };
-  ipcMain.on('getCurrencyComparisons', (e, primary) => sendCurrencyComparisons(primary));
-
-  ipcMain.on('saveAddress', (e, key, address) => {
-    try {
-      const addresses = storage.getItem('addresses');
-      storage.setItem('addresses', Object.assign({}, addresses, {
-        [key]: address
-      }));
-    } catch(err) {
-      handleError(err);
-    }
-  });
-
-  ipcMain.on('getAddressesSync', e => {
-    const addresses = storage.getItem('addresses');
-    e.returnValue = addresses;
-  });
-
-  ipcMain.on('cancelOrder', (e, id) => {
-
-  });
-
-  let balances = [];
-  const sendBalances = force  => {
-
-  };
-  ipcMain.on('getBalances', () => sendBalances(true));
-  setInterval(sendBalances, stdInterval);
-
-  /*ipcMain.on('setKeyPair', (e, pair) => {
-    storage.setItem('keyPair', pair);
-    keyPair = pair;
-    sendKeyPair();
-    sendOrderBook(true);
-    sendTradeHistory(true);
-    sendMyOrders(true);
-    sendOrderHistory(true);
-    sendCurrentPrice(true);
-  });*/
 
   ipcMain.on('isFirstRun', e => {
     const isFirstRun = storage.getItem('isFirstRun');
@@ -403,6 +284,7 @@ const onReady = new Promise(resolve => app.on('ready', resolve));
     await onReady;
 
     openAppWindow();
+    startBackground();
 
   } catch(err) {
     handleError(err);
@@ -414,11 +296,3 @@ const onReady = new Promise(resolve => app.on('ready', resolve));
 app.on('window-all-closed', () => {
   app.quit();
 });
-
-// check for version number. Minimum supported blocknet client version
-function versionCheck(version) {
-  if (version < 3090400) {
-    return {name:"Unsupported Version", message:"BLOCK DX requires Blocknet wallet version 3.9.04 or greater."};
-  }
-  return null;
-}
