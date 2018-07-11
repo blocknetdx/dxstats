@@ -4,6 +4,12 @@
 
 #### Run and test locally:
 
+# Open Terminal Window
+
+`npm start`
+
+# Open 2nd terminal Window
+
 `npm run start-app`
 
 #### Build native packages:
