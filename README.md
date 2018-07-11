@@ -12,6 +12,8 @@
 
 `npm run start-app`
 
+# App should be running now
+
 #### Build native packages:
  
 `npm run pack-native`
