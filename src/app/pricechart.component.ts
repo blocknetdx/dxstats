@@ -184,7 +184,6 @@ export class PricechartComponent implements AfterViewInit {
             {'period':'MM','format':'MMM'},
             {'period':'YYYY','format':'YYYY'}],
           parseDates: true,
-          minPeriod: 'mm'
           minPeriod: '1mm'
         },
         dataProvider: items
