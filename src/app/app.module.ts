@@ -130,11 +130,11 @@ const dev = environment.useMockAPI ? [
     BreakpointService,
     TradehistoryService,
     CurrentpriceService,
-    // BlockCurrencyPipe,
+    BlockCurrencyPipe,
     OpenordersService,
     OrderbookService,
     WebSocketService,
-    // CryptocurrencyService,
+    CryptocurrencyService,
     // BalancesService,
     {
       provide: PERFECT_SCROLLBAR_CONFIG,

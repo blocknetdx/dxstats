@@ -4,7 +4,6 @@ const P2Prot = require('./libs');
 class BackgroundManager {
   constructor(appWindow, backgroundWindow) {
     this.appWindow = appWindow;
-    this.backgroundWindow = backgroundWindow;
   }
 
   async init() {

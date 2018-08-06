@@ -83,6 +83,7 @@ class Coin {
 
     socket.on('error', (err) => {
       console.log('socket threw error: ' + err.message);
+      socket.end();
       peerIndex++;
       if (peerIndex >= self.network.dnsSeeds.length)
         peerIndex = 0;

@@ -40,14 +40,14 @@ export class PricechartComponent implements AfterViewInit {
     //     timeframe: '1M',
     //     custom_css_url: `${window.location.origin}/assets/tv/chart-dark-theme.css`,
     //     container_id: 'tv_chart_container',
-    //     //	BEWARE: no trailing slash is expected in feed URL
+    //    //	BEWARE: no trailing slash is expected in feed URL
     //     symbol: 'AAPL',
-    //     datafeed: new Datafeeds.UDFCompatibleDatafeed('https://demo_feed.tradingview.com'),
+    //    datafeed: new Datafeeds.UDFCompatibleDatafeed('https://demo_feed.tradingview.com'),
     //     // symbol: 'BTC',
     //     // datafeed: new Datafeeds.UDFCompatibleDatafeed('http://localhost:3000'),
     //     library_path: 'assets/charting_library/',
     //     locale: 'en',
-    //     //	Regression Trend-related functionality is not implemented yet, so it's hidden for a while
+         //	Regression Trend-related functionality is not implemented yet, so it's hidden for a while
     //     drawings_access: { type: 'black', tools: [{ name: 'Regression Trend' }, { name: '' }] },
     //     enabled_features: ['chart_property_page_trading' ], // 'move_logo_to_main_pane'
     //     disabled_features: ['use_localstorage_for_settings', 'left_toolbar', 'header_saveload', 'chart_property_page_scales',
@@ -185,6 +185,7 @@ export class PricechartComponent implements AfterViewInit {
             {'period':'YYYY','format':'YYYY'}],
           parseDates: true,
           minPeriod: 'mm'
+          minPeriod: '1mm'
         },
         dataProvider: items
           .map(i => Object.assign({}, i, {
