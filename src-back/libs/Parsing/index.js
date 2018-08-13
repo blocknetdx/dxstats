@@ -273,7 +273,7 @@ function refresh() {
 
   appWindow.send('canceledOrder', orderBook[pair].cancelled, [pair.split('/')]);
   appWindow.send('tradeHistory', orderBook[pair].finished, [pair.split('/')]);
-  appWindow.send('orderHistory', build_TradeHistory(orderBook[pair].asks));
+  appWindow.send('orderHistory', build_TradeHistory(orderBook[pair].finished));
 }
 
 function sendKeyPair() {
@@ -285,7 +285,7 @@ function selectMarketPair(e, arr) {
   keyPair = arr;
   storage.setItem('keyPair', arr);
   sendKeyPair();
-  appWindow.send('orderHistory', build_TradeHistory(orderBook[pair].asks));
+  appWindow.send('orderHistory', build_TradeHistory(orderBook[pair].finished));
 }
 
 const build_TradeHistory = (data) => {
