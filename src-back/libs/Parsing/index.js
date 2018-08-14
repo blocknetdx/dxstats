@@ -285,7 +285,6 @@ function selectMarketPair(e, arr) {
   keyPair = arr;
   storage.setItem('keyPair', arr);
   sendKeyPair();
-  appWindow.send('orderHistory', build_TradeHistory(orderBook[keyPair].finished));
 }
 
 const build_TradeHistory = (data) => {
