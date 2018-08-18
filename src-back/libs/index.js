@@ -46,6 +46,7 @@ class Coin {
         const temp = JSON.parse(buf.toString('utf8'));
 
         if (message.command === 'xbridge' && message.payload.xbridgePacket !== null) {
+          console.log('sending packet to frontend');
           if (message.payload.xbridgePacket.header.command === 3 || message.payload.xbridgePacket.header.command === 4) {
             parsing.send_xBridgeMsg(message.payload.xbridgePacket);
           } else if (message.payload.xbridgePacket.header.command === 22) {
@@ -53,6 +54,7 @@ class Coin {
           } else if (message.payload.xbridgePacket.header.command === 24) {
             parsing.finished_xBridgeOrder(message.payload.xbridgePacket);
           }
+          console.log('packet sent to frontend');
         }
 
         if (typeof temp[0] !== 'undefined') {

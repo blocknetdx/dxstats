@@ -5,7 +5,10 @@ const pythonstruct = require('python-struct');
 const ip = require('ip');
 const bufferEquals = require('buffer-equals');
 const settings = require('electron-settings');
+const crypto = require('crypto');
 //const bufferReverse = require('buffer-reverse');
+
+const packetHashes = [];
 
 exports.buffer8 = struct.Buffer(8);
 exports.buffer32 = struct.Buffer(32);
@@ -512,7 +515,19 @@ exports.xbridge = (function () {
     if (settings.get('packets') === undefined) {
       settings.set('packets', []);
     }
-    settings.set('packets', add ? [...settings.get('packets'), xbuffer] : removeAllOccurrences(settings.get('packets'), xbuffer.hubTxid));
+
+    const sha256 = crypto.createHash('sha256');
+    sha256.update(JSON.stringify(xbuffer));
+    const hashedPacket = sha256.digest('hex');
+    console.log('hash = ' + hashedPacket);
+
+    if (packetHashes.includes(hashedPacket)) {
+      console.log('packet is in hash list, ignoring packet');
+      return null;
+    } else {
+      console.log('added packet to packet hashes');
+      packetHashes.push(hashedPacket);
+    }
 
     return xbuffer;
   }
