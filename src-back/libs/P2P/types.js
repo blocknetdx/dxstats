@@ -483,20 +483,20 @@ exports.xbridge = (function () {
         hubTxid: readUInt256LE(reader),
         reason: reader.readUInt32LE()
       };
-      if (settings.get('cancelledOrders') === undefined)
-        settings.set('cancelledOrders', []);
-      settings.set('cancelledOrders', [...settings.get('cancelledOrders'), xbuffer]);
-      add = false;
+      //if (settings.get('cancelledOrders') === undefined)
+      //  settings.set('cancelledOrders', []);
+      //settings.set('cancelledOrders', [...settings.get('cancelledOrders'), xbuffer]);
+      //add = false;
     } else if (xBridgeHeader.command === 24) { //xbcTransactionFinished
       xbuffer = {
         header: xBridgeHeader,
         clientAddr: readUInt160LE(reader),
         hubTxid: readUInt256LE(reader)
       };
-      if (settings.get('finishedOrders') === undefined)
-        settings.set('finishedOrders', []);
-      settings.set('finishedOrders', [...settings.get('finishedOrders'), xbuffer]);
-      add = false;
+      //if (settings.get('finishedOrders') === undefined)
+      //  settings.set('finishedOrders', []);
+      //settings.set('finishedOrders', [...settings.get('finishedOrders'), xbuffer]);
+      //add = false;
     } else {
       console.log('Unrecognized command: ' + xBridgeHeader.command);
       console.log('Attempting to locate beginning of header.');
