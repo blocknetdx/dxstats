@@ -260,7 +260,6 @@ exports.xbridge = (function () {
     console.log('Xbridge command (in header) = ' + xBridgeHeader.command);
 
     let xbuffer;
-    let add = true;
 
     reader.readOffset += 97; //filler (97 B) + header (32 B) = 129 bytes
 
@@ -501,7 +500,7 @@ exports.xbridge = (function () {
       console.log('Unrecognized command: ' + xBridgeHeader.command);
       console.log('Attempting to locate beginning of header.');
 
-      let o = buffer.toString('hex').indexOf('250000ff') / 2;
+      let o = buffer.toString('hex').indexOf('260000ff') / 2;
       if (o === -1) {
         console.log('Could not find beginning of header.');
       } else {
