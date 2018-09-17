@@ -237,7 +237,7 @@ exports.xbridge = (function () {
     return xbuffer.encode(value, buffer, offset);
   }
 
-  function decode(buffer, offset, end) {
+  function decode(buffer, offset, end, processed = false) {
     if (!offset) offset = 31;
     if (!end) end = buffer.length;
     encode.bytes = decode.bytes = end;
@@ -496,24 +496,31 @@ exports.xbridge = (function () {
       //  settings.set('finishedOrders', []);
       //settings.set('finishedOrders', [...settings.get('finishedOrders'), xbuffer]);
       //add = false;
+    } else if (xBridgeHeader.command === 50) {
+      xbuffer = {
+        header: xBridgeHeader
+      };
     } else {
+      if (processed)
+        return null;
+
       console.log('Unrecognized command: ' + xBridgeHeader.command);
       console.log('Attempting to locate beginning of header.');
 
-      let o = buffer.toString('hex').indexOf('260000ff') / 2;
-      if (o === -1) {
+      const o = buffer.toString('hex').indexOf('260000ff') / 2;
+      if (o < 0) {
         console.log('Could not find beginning of header.');
       } else {
         console.log('Found beginning of header! Offset = ' + o);
-        return decode(buffer, o, end);
+        return decode(buffer, o, end, true);
       }
 
       return null;
     }
 
-    if (settings.get('packets') === undefined) {
+    /*if (settings.get('packets') === undefined) {
       settings.set('packets', []);
-    }
+    }*/
 
     const sha256 = crypto.createHash('sha256');
     sha256.update(JSON.stringify(xbuffer));
