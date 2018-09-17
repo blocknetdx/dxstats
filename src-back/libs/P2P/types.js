@@ -482,24 +482,24 @@ exports.xbridge = (function () {
         hubTxid: readUInt256LE(reader),
         reason: reader.readUInt32LE()
       };
-      //if (settings.get('cancelledOrders') === undefined)
-      //  settings.set('cancelledOrders', []);
-      //settings.set('cancelledOrders', [...settings.get('cancelledOrders'), xbuffer]);
-      //add = false;
     } else if (xBridgeHeader.command === 24) { //xbcTransactionFinished
       xbuffer = {
         header: xBridgeHeader,
         clientAddr: readUInt160LE(reader),
         hubTxid: readUInt256LE(reader)
       };
-      //if (settings.get('finishedOrders') === undefined)
-      //  settings.set('finishedOrders', []);
-      //settings.set('finishedOrders', [...settings.get('finishedOrders'), xbuffer]);
-      //add = false;
-    } else if (xBridgeHeader.command === 50) {
+    } else if (xBridgeHeader.command === 50) { //xbcServicesPing
       xbuffer = {
-        header: xBridgeHeader
+        header: xBridgeHeader,
+        services: []
       };
+
+      while (xbuffer.header.extSize > reader.readOffset) {
+        if (xbuffer.header.extSize - reader.readOffset <= 0)
+          break;
+
+        xbuffer.services.push(reader.readStringNT());
+      }
     } else {
       if (processed)
         return null;
@@ -517,10 +517,6 @@ exports.xbridge = (function () {
 
       return null;
     }
-
-    /*if (settings.get('packets') === undefined) {
-      settings.set('packets', []);
-    }*/
 
     const sha256 = crypto.createHash('sha256');
     sha256.update(JSON.stringify(xbuffer));
